@@ -1,0 +1,14 @@
+<Alloy>
+	<Window id="login" backgroundColor="white">	
+		<ActivityIndicator id="activity"/>
+		<View id="container">
+		 <TextField id="username" />
+		 <TextField id="password" />
+        <View id="buttonLogin">	
+				<Label id="textBottom">Login</Label>
+		</View>	
+		
+       
+		  </View>
+	</Window>
+</Alloy>
