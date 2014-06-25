@@ -1,7 +1,7 @@
 function Controller() {
     function checkdata(value) {
         var testresults = false;
-        var filter = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\_\-\.\@\/]+/;
+        var filter = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\_\-\.\@\/]+$/;
         filter.test(value) && (testresults = true);
         return testresults;
     }
@@ -86,7 +86,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.login.addEventListener("android:back", function() {
-        Ti.API.info("Log: The Android back button was pressed - window not closed");
+        Ti.API.info("Log: The Android back button was pressed - DONT CLOSE THIS WINDOW SOMETHING!!!!");
         return false;
     });
     var user_id = 0;
@@ -99,7 +99,7 @@ function Controller() {
         client.onload = function() {
             var json = this.responseText;
             var response = JSON.parse(json);
-            if ("undefined" == typeof response.id) alert("Credenciales invalidas/Usuario no activado. Por favor intenta de nuevo!"); else {
+            if ("undefined" == typeof response.id) alert("Failed credentials"); else {
                 $.username.blur();
                 $.password.blur();
                 user_id = response.id;
@@ -114,13 +114,13 @@ function Controller() {
             alert("Transmission error: " + e.error);
         };
         if ("" != $.username.value && "" != $.password.value) if (checkdata($.username.value)) if (checkdata($.password.value)) {
-            var user1 = Ti.Utils.base64encode($.username.value + "$@$" + $.password.value);
+            var user1 = Ti.Utils.base64encode($.username.value + "$#$" + $.password.value);
             var params = {
                 tc: Alloy.Globals.USER_MOBILE.toString(),
                 u: user1.toString()
             };
             client.send(params);
-        } else alert("Password invalido. (Caracteres no validos: ^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_-.@)"); else alert("Username invalido"); else alert("Username/Password son requeridos!");
+        } else alert("Please enter a valid password"); else alert("Please enter a valid username"); else alert("Username/Password son requeridos!");
     });
     _.extend($, exports);
 }

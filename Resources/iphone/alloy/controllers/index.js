@@ -1,6 +1,6 @@
 function Controller() {
     function next() {
-        Alloy.createController("login").getView().open();
+        Alloy.createController("register").getView().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
@@ -15,7 +15,7 @@ function Controller() {
     });
     $.__views.index && $.addTopLevelView($.__views.index);
     $.__views.__alloyId0 = Ti.UI.createButton({
-        title: "Open",
+        title: "Log Out",
         top: "60dp",
         id: "__alloyId0"
     });
@@ -29,6 +29,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.index.addEventListener("open", function() {
+        0 == Alloy.Globals.USERID && Alloy.createController("login").getView().open();
         var activity = $.index.activity;
         if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
             activity.actionBar.title = "GoTransfer";

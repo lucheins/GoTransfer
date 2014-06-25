@@ -1,6 +1,7 @@
 function Controller() {
     function next() {
-        Alloy.createController("start").getView().open();
+        Ti.App.Properties.setString("user_id", "0");
+        Alloy.createController("login").getView().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
@@ -15,7 +16,7 @@ function Controller() {
     });
     $.__views.index && $.addTopLevelView($.__views.index);
     $.__views.__alloyId0 = Ti.UI.createButton({
-        title: "Open",
+        title: "Log Out",
         top: "60dp",
         id: "__alloyId0"
     });
@@ -28,14 +29,10 @@ function Controller() {
     $.__views.index.add($.__views.fbButton);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var facebook = Alloy.Globals.Facebook;
-    facebook.appid = 0xd90ae712e5e0;
-    facebook.addEventListener("login", function(e) {
-        e.success && Alloy.createController("start").getView().open();
-    });
     $.index.addEventListener("open", function() {
+        0 == Alloy.Globals.USERID && Alloy.createController("login").getView().open();
         var activity = $.index.activity;
-        if (Alloy.Globals.Android.Api >= 11) {
+        if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
             activity.actionBar.title = "GoTransfer";
             activity.actionBar.displayHomeAsUp = false;
         }

@@ -14,6 +14,9 @@ facebook.addEventListener('login', function(e) {
 
 
 $.startWin.addEventListener('open', function(e) {
+var user = Ti.App.Properties.getString('user_id');
+alert(user);
+
 var activity = $.startWin.activity;
 if (Ti.Platform.Android){  
     if( Alloy.Globals.Android.Api >= 11 ) {

@@ -58,8 +58,10 @@ function Controller() {
         e.success || $.startWin.close();
     });
     $.startWin.addEventListener("open", function() {
+        var user = Ti.App.Properties.getString("user_id");
+        alert(user);
         var activity = $.startWin.activity;
-        if (Alloy.Globals.Android.Api >= 11) {
+        if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
             activity.actionBar.title = "GoTransfer";
             activity.actionBar.displayHomeAsUp = true;
             activity.actionBar.onHomeIconItemSelected = function() {

@@ -10,6 +10,10 @@ Alloy.Globals.USER = "GoTraLucaMk1981";
 
 Alloy.Globals.PASS = "#TaxiVan+2014";
 
-Alloy.Globals.USER_MOBILE = Ti.Utils.base64encode(Alloy.Globals.USER + "$#$" + Alloy.Globals.PASS);
+Alloy.Globals.USER_MOBILE = Ti.Utils.base64encode(Alloy.Globals.USER + "$@$" + Alloy.Globals.PASS);
+
+Alloy.Globals.USERID = Ti.App.Properties.getString("user_id");
+
+Alloy.Globals.USERNAME = Ti.App.Properties.getString("username");
 
 Alloy.createController("index");

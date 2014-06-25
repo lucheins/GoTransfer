@@ -1,0 +1,18 @@
+<Alloy>
+	<Window id="register" backgroundColor="white">	
+		<ActivityIndicator id="activity"/>
+		<View id="registerForm">
+			<TextField id="user" />
+			<TextField id="pass" />
+			<TextField id="mobile" />
+			<Label id="sexLabel">Select your current timezone</Label>
+			<Picker id="pickSex" >
+	            <PickerRow value='masculino' title='Masculino' />
+				<PickerRow value='femenino' title='Femenino' />
+			</Picker>
+	        <View id="buttonLogin">	
+					<Label id="textBottom">Registrarme</Label>
+			</View>
+		</View>
+	</Window>
+</Alloy>

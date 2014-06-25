@@ -10,7 +10,12 @@
 // });
 // 
 
+
 $.index.addEventListener('open', function(e) {
+if(Alloy.Globals.USERID == 0){
+	Alloy.createController("login").getView().open();
+}; 
+
 var activity = $.index.activity;
 if (Ti.Platform.Android){ 
 if( Alloy.Globals.Android.Api >= 11 ) {
@@ -24,5 +29,6 @@ if( Alloy.Globals.Android.Api >= 11 ) {
 $.index.open();
 
 function next() {
-    Alloy.createController("login").getView().open();
+    // Ti.App.Properties.setString('user_id', '0');
+    Alloy.createController("register").getView().open();
 }

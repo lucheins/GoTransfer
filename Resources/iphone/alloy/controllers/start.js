@@ -15,36 +15,36 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.startWin && $.addTopLevelView($.__views.startWin);
-    $.__views.__alloyId1 = Ti.UI.createButton({
+    $.__views.__alloyId4 = Ti.UI.createButton({
         title: "Cancel",
         top: "30dp",
-        id: "__alloyId1"
+        id: "__alloyId4"
     });
-    $.__views.startWin.add($.__views.__alloyId1);
-    closeWindow ? $.__views.__alloyId1.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId1!click!closeWindow"] = true;
+    $.__views.startWin.add($.__views.__alloyId4);
+    closeWindow ? $.__views.__alloyId4.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId4!click!closeWindow"] = true;
     $.__views.footer = Ti.UI.createView({
         id: "footer",
         height: "40dp"
     });
     $.__views.startWin.add($.__views.footer);
-    var __alloyId3 = [];
-    var __alloyId7 = {
+    var __alloyId6 = [];
+    var __alloyId10 = {
         title: "All",
         ns: "Alloy.Abstract"
     };
-    __alloyId3.push(__alloyId7);
-    var __alloyId8 = {
+    __alloyId6.push(__alloyId10);
+    var __alloyId11 = {
         title: "Active",
         ns: "Alloy.Abstract"
     };
-    __alloyId3.push(__alloyId8);
-    var __alloyId9 = {
+    __alloyId6.push(__alloyId11);
+    var __alloyId12 = {
         title: "Done",
         ns: "Alloy.Abstract"
     };
-    __alloyId3.push(__alloyId9);
+    __alloyId6.push(__alloyId12);
     $.__views.tabbedbar = Ti.UI.iOS.createTabbedBar({
-        labels: __alloyId3,
+        labels: __alloyId6,
         id: "tabbedbar"
     });
     $.__views.footer.add($.__views.tabbedbar);
@@ -56,6 +56,8 @@ function Controller() {
         e.success || $.startWin.close();
     });
     $.startWin.addEventListener("open", function() {
+        var user = Ti.App.Properties.getString("user_id");
+        alert(user);
         var activity = $.startWin.activity;
         if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
             activity.actionBar.title = "GoTransfer";
@@ -65,7 +67,7 @@ function Controller() {
             };
         }
     });
-    __defers["$.__views.__alloyId1!click!closeWindow"] && $.__views.__alloyId1.addEventListener("click", closeWindow);
+    __defers["$.__views.__alloyId4!click!closeWindow"] && $.__views.__alloyId4.addEventListener("click", closeWindow);
     _.extend($, exports);
 }
 
