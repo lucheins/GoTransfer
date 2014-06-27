@@ -1,9 +1,9 @@
-"#user":{
+"#name":{
 	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
 	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
 	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
 	color: '#336699',
-	hintText: 'Username',
+	hintText: 'Nombre',
 	top: '2%',
 	width: '80%',
 	height: '10%',
@@ -12,13 +12,12 @@
 	borderColor: '#c1c1c1',
 	paddingLeft: 5
 },
-"#pass":{
+"#username":{
 	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
 	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
 	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
 	color: '#336699',
-	hintText: 'Password',
-	passwordMask: 'true',
+	hintText: 'Nickname',
 	top: '14%',
 	width: '80%',
 	height: '10%',
@@ -27,7 +26,7 @@
 	borderColor: '#c1c1c1',
 	paddingLeft: 5
 },
-"#mobile":{
+"#pass1":{
 	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
 	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
 	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
@@ -42,17 +41,31 @@
 	borderColor: '#c1c1c1',
 	paddingLeft: 5
 },
-"#sexLabel":{
+"#email":{
+	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
+	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
+	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
+	color: '#336699',
+	hintText: 'E-mail',
 	top: '38%',
+	width: '80%',
+	height: '10%',
+	left: '10%',
+	border: 1,
+	borderColor: '#c1c1c1',
+	paddingLeft: 5
+},
+"#sexLabel":{
+	top: '50%',
 	font: {
 		   	fontSize:'15dp',
-		   	fontWeight:'bold'
+		   	fontWeight:'bold',
 		},
 	color: '#c9c9c9',
 	left: '10%',
 },
 "#pickSex":{
-	top: '46%',		
+	top: '56%',		
 	width: '80%',
 	left: '10%',
 	font: {
@@ -60,7 +73,7 @@
 			},
 	
 },
-"#buttonLogin":{
+"#buttonRegister":{
 	font: {
 		   	fontSize:'16dp',
 		   	fontWeight:'bold'

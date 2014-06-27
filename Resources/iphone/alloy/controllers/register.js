@@ -19,12 +19,12 @@ function Controller() {
         id: "registerForm"
     });
     $.__views.register.add($.__views.registerForm);
-    $.__views.user = Ti.UI.createTextField({
+    $.__views.name = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
         returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
-        hintText: "Username",
+        hintText: "Nombre",
         top: "2%",
         width: "80%",
         height: "10%",
@@ -32,16 +32,15 @@ function Controller() {
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "user"
+        id: "name"
     });
-    $.__views.registerForm.add($.__views.user);
-    $.__views.pass = Ti.UI.createTextField({
+    $.__views.registerForm.add($.__views.name);
+    $.__views.username = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
         returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
-        hintText: "Password",
-        passwordMask: "true",
+        hintText: "Nickname",
         top: "14%",
         width: "80%",
         height: "10%",
@@ -49,10 +48,10 @@ function Controller() {
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "pass"
+        id: "username"
     });
-    $.__views.registerForm.add($.__views.pass);
-    $.__views.mobile = Ti.UI.createTextField({
+    $.__views.registerForm.add($.__views.username);
+    $.__views.pass1 = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
         returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
@@ -66,46 +65,26 @@ function Controller() {
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "mobile"
+        id: "pass1"
     });
-    $.__views.registerForm.add($.__views.mobile);
-    $.__views.sexLabel = Ti.UI.createLabel({
+    $.__views.registerForm.add($.__views.pass1);
+    $.__views.email = Ti.UI.createTextField({
+        borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
+        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
+        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
+        color: "#336699",
+        hintText: "E-mail",
         top: "38%",
-        font: {
-            fontSize: "15dp",
-            fontWeight: "bold"
-        },
-        color: "#c9c9c9",
-        left: "10%",
-        text: "Select your current timezone",
-        id: "sexLabel"
-    });
-    $.__views.registerForm.add($.__views.sexLabel);
-    $.__views.pickSex = Ti.UI.createPicker({
-        top: "46%",
         width: "80%",
+        height: "10%",
         left: "10%",
-        font: {
-            fontSize: "10dp"
-        },
-        id: "pickSex"
+        border: 1,
+        borderColor: "#c1c1c1",
+        paddingLeft: 5,
+        id: "email"
     });
-    $.__views.registerForm.add($.__views.pickSex);
-    var __alloyId1 = [];
-    $.__views.__alloyId2 = Ti.UI.createPickerRow({
-        value: "masculino",
-        title: "Masculino",
-        id: "__alloyId2"
-    });
-    __alloyId1.push($.__views.__alloyId2);
-    $.__views.__alloyId3 = Ti.UI.createPickerRow({
-        value: "femenino",
-        title: "Femenino",
-        id: "__alloyId3"
-    });
-    __alloyId1.push($.__views.__alloyId3);
-    $.__views.pickSex.add(__alloyId1);
-    $.__views.buttonLogin = Ti.UI.createView({
+    $.__views.registerForm.add($.__views.email);
+    $.__views.buttonRegister = Ti.UI.createView({
         font: {
             fontSize: "16dp",
             fontWeight: "bold"
@@ -117,17 +96,39 @@ function Controller() {
         bottom: "5%",
         height: "10%",
         textAlign: "center",
-        id: "buttonLogin"
+        id: "buttonRegister"
     });
-    $.__views.registerForm.add($.__views.buttonLogin);
+    $.__views.registerForm.add($.__views.buttonRegister);
     $.__views.textBottom = Ti.UI.createLabel({
         text: "Registrarme",
         id: "textBottom"
     });
-    $.__views.buttonLogin.add($.__views.textBottom);
+    $.__views.buttonRegister.add($.__views.textBottom);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    $.buttonRegister.addEventListener("click", function() {
+        var client = Ti.Network.createHTTPClient();
+        var url = Alloy.Globals.DOMAIN + Alloy.Globals.URL_REGISTER;
+        client.open("POST", url);
+        client.ondatastream = function() {};
+        client.onload = function() {
+            var json = this.responseText;
+            var response = JSON.parse(json);
+            alert(response);
+            "OK" == response.result ? alert("Registrado!") : alert("No Registrado!");
+        };
+        client.onerror = function(e) {
+            alert("Transmission error: " + e.error);
+        };
+        var params = {
+            tc: Alloy.Globals.USER_MOBILE.toString(),
+            name: $.name.value,
+            username: $.username.value,
+            passwd: $.pass1.value,
+            email: $.email.value
+        };
+        client.send(params);
+    });
     _.extend($, exports);
 }
 

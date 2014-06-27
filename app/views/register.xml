@@ -2,15 +2,16 @@
 	<Window id="register" backgroundColor="white">	
 		<ActivityIndicator id="activity"/>
 		<View id="registerForm">
-			<TextField id="user" />
-			<TextField id="pass" />
-			<TextField id="mobile" />
-			<Label id="sexLabel">Select your current timezone</Label>
-			<Picker id="pickSex" >
+			<TextField id="name" />
+			<TextField id="username" />
+			<TextField id="pass1" />
+			<TextField id="email" />
+			<!-- <Label id="sexLabel">Select your current timezone</Label> -->
+			<!-- <Picker id="pickSex" >
 	            <PickerRow value='masculino' title='Masculino' />
 				<PickerRow value='femenino' title='Femenino' />
-			</Picker>
-	        <View id="buttonLogin">	
+			</Picker> -->
+	        <View id="buttonRegister">	
 					<Label id="textBottom">Registrarme</Label>
 			</View>
 		</View>
