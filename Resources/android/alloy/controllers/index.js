@@ -5,23 +5,8 @@ function Controller() {
             toggleLeftSlider();
         }
     }
-    function toggleLogin() {
-        if (0 == Ti.App.Properties.getString("user_id")) {
-            $.menuLogger.title = "Iniciar Sesion";
-            $.menuLogger.addEventListener("click", function() {
-                Alloy.createController("login").getView().open();
-            });
-        }
-        if (Ti.App.Properties.getString("user_id") > 0) {
-            $.menuLogger.title = "Cerrar Sesion";
-            $.menuLogger.addEventListener("click", function() {
-                Ti.App.Properties.setString("user_id", "0");
-                return;
-            });
-        }
-    }
     function next() {
-        0 == Alloy.Globals.USERID || 0 == Ti.App.Properties.getString("user_id") ? Alloy.createController("portal").getView().open() : Alloy.createController("bookForm").getView().open();
+        0 == Ti.App.Properties.getString("user_id") ? Alloy.createController("portal").getView().open() : Alloy.createController("bookForm").getView().open();
     }
     function endTouch() {
         buttonPressed && (buttonPressed = false);
@@ -64,15 +49,24 @@ function Controller() {
         }
     }
     function toggleLeftSlider() {
-        toggleLogin();
         if (hasSlided) {
             direction = "reset";
             $.movableView.animate(animateReset);
             hasSlided = false;
+            $.menuLogger.removeEventListener("click", toggleLogin);
+            $.menuLogger.removeEventListener("click", toggleLogout);
         } else {
             direction = "right";
             $.movableView.animate(animateRight);
             hasSlided = true;
+            if (0 == Ti.App.Properties.getString("user_id")) {
+                $.menuLogger.title = "Iniciar Sesion";
+                $.menuLogger.addEventListener("click", toggleLogin);
+            }
+            if (Ti.App.Properties.getString("user_id") > 0) {
+                $.menuLogger.title = "Cerrar Sesion";
+                $.menuLogger.addEventListener("click", toggleLogout);
+            }
         }
         Ti.App.fireEvent("sliderToggled", {
             hasSlided: hasSlided,
@@ -180,11 +174,6 @@ function Controller() {
             };
         }
     });
-    var logger;
-    $.index.addEventListener("focus", function() {
-        0 == Ti.App.Properties.getString("user_id") && (logger = "loggedOut");
-        Ti.App.Properties.getString("user_id") > 0 && (logger = "loggedIn");
-    });
     $.index.open();
     var animateRight = Ti.UI.createAnimation({
         left: 200,
@@ -217,6 +206,15 @@ function Controller() {
     $.leftMenu.addEventListener("touchend", endTouch);
     $.movableView.addEventListener("touchmove", moveTouch);
     $.leftMenu.addEventListener("touchmove", moveTouch);
+    var toggleLogin = function() {
+        $.menuLogger.removeEventListener("click", toggleLogin);
+        Alloy.createController("login").getView().open();
+    };
+    var toggleLogout = function() {
+        $.menuLogger.removeEventListener("click", toggleLogout);
+        Ti.App.Properties.setString("user_id", "0");
+        alert("Sesion cerrada con exito!");
+    };
     __defers["$.__views.leftButton!click!toggle"] && $.__views.leftButton.addEventListener("click", toggle);
     __defers["$.__views.__alloyId5!click!next"] && $.__views.__alloyId5.addEventListener("click", next);
     _.extend($, exports);

@@ -1,3 +1,4 @@
+
 $.login.addEventListener('open', function(e) {
 	var activity = $.login.activity;
 	if (Ti.Platform.Android){ 
@@ -6,8 +7,7 @@ $.login.addEventListener('open', function(e) {
 	        activity.actionBar.displayHomeAsUp = true; 
 	        activity.actionBar.onHomeIconItemSelected = function() { 
 			$.login.close();
-			$.login = null;
-			
+			$.login = null;	
 			};
 		}
 	};
@@ -105,9 +105,12 @@ function openWindowsLoginSuccess()
     
     var win = Alloy.createController('bookForm').getView();
     win.open();
-	$.login.close();     	  
+	$.login.close();
+	$.login = null;	  
 }
 $.login.addEventListener('android:back', function(e) {
     Ti.API.info("Log: back button from login to home");
  	Alloy.createController('index').getView();
+ 	$.login.close();
+ 	$.login = null;	
   });

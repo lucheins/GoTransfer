@@ -6,17 +6,18 @@ function Controller() {
         }
     }
     function toggleLogin() {
-        if (0 == Ti.App.Properties.getString("user_id") && "loggedOut" == logger) {
+        if (0 == Ti.App.Properties.getString("user_id") && ($.menuLogger.title = "Cerrar Sesion")) {
             $.menuLogger.title = "Iniciar Sesion";
             $.menuLogger.addEventListener("click", function() {
                 Alloy.createController("login").getView().open();
             });
         }
-        if (Ti.App.Properties.getString("user_id") > 0) {
+        if (Ti.App.Properties.getString("user_id") > 0 && ($.menuLogger.title = "Iniciar Sesion")) {
             $.menuLogger.title = "Cerrar Sesion";
             $.menuLogger.addEventListener("click", function() {
                 Ti.App.Properties.setString("user_id", "0");
-                logger = "loggedOut";
+                alert("Sesion Cerrada con exito!");
+                return;
             });
         }
     }
@@ -190,11 +191,6 @@ function Controller() {
                 }
             };
         }
-    });
-    var logger;
-    $.index.addEventListener("focus", function() {
-        0 == Ti.App.Properties.getString("user_id") && (logger = "loggedOut");
-        Ti.App.Properties.getString("user_id") > 0 && (logger = "loggedIn");
     });
     $.index.open();
     var animateRight = Ti.UI.createAnimation({

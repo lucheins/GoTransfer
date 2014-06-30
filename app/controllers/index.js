@@ -33,15 +33,6 @@ if( Alloy.Globals.Android.Api >= 11 ) {
 };
 
 });
-var logger;
-$.index.addEventListener('focus', function(e) {
-	if (Ti.App.Properties.getString('user_id') == 0){
-		logger = 'loggedOut';
-	}
-	if (Ti.App.Properties.getString('user_id') > 0){
-		logger = 'loggedIn';
-	}
-});
 // fin event listener focus
 $.index.open();
 // IOS MENU BUTTON
@@ -54,25 +45,9 @@ function toggle() {
 }; 
 
 
-function toggleLogin () {
-	 	if (Ti.App.Properties.getString('user_id') == 0){
-	    	$.menuLogger.title = 'Iniciar Sesion';
-	    	$.menuLogger.addEventListener('click', function (e){
-	    		
-	    		Alloy.createController("login").getView().open();
-	    	});
-	    } 
-	    if (Ti.App.Properties.getString('user_id') > 0 ){	
-	    	$.menuLogger.title = 'Cerrar Sesion';
-	    	$.menuLogger.addEventListener('click', function (e){
-	    		Ti.App.Properties.setString('user_id', '0');
-	    		return;
-	   		});
-	   	}
-	   
-	};
+
 function next() {
-    if(Alloy.Globals.USERID == 0 || Ti.App.Properties.getString('user_id') == 0){
+    if(Ti.App.Properties.getString('user_id') == 0){
 	Alloy.createController("portal").getView().open();
 	} else { 
     Alloy.createController("bookForm").getView().open();
@@ -193,9 +168,17 @@ $.leftMenu.addEventListener('touchmove', moveTouch);
 
 
 
+var toggleLogin = function() {
+	$.menuLogger.removeEventListener('click', toggleLogin);
+	Alloy.createController("login").getView().open();
+};
+var toggleLogout = function() {
+	$.menuLogger.removeEventListener('click', toggleLogout);
+	Ti.App.Properties.setString('user_id', '0');
+	alert('Sesion cerrada con exito!');
+};
 
 function toggleLeftSlider () {
-	toggleLogin();
 	if (!hasSlided) {
 		direction = "right";
 		if (Titanium.Platform.osname == "iOS") {
@@ -203,6 +186,14 @@ function toggleLeftSlider () {
 		}
 		$.movableView.animate(animateRight);
 		hasSlided = true;
+		if (Ti.App.Properties.getString('user_id') == 0){
+	    	$.menuLogger.title = 'Iniciar Sesion';
+	    	$.menuLogger.addEventListener('click', toggleLogin);
+	    } 
+	    if (Ti.App.Properties.getString('user_id') > 0 ){	
+	    	$.menuLogger.title = 'Cerrar Sesion';
+	    	$.menuLogger.addEventListener('click', toggleLogout);
+	   	}
 	} else {
 		direction = "reset";
 		if (Titanium.Platform.osname == "iOS") {
@@ -210,6 +201,8 @@ function toggleLeftSlider () {
 		}
 		$.movableView.animate(animateReset);
 		hasSlided = false;
+		$.menuLogger.removeEventListener('click', toggleLogin);
+		$.menuLogger.removeEventListener('click', toggleLogout);
 	}
 	Ti.App.fireEvent("sliderToggled", {
 		hasSlided : hasSlided,
