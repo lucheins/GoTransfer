@@ -17,6 +17,7 @@ $.index.addEventListener('android:back', function(e) {
   });
 
 $.index.addEventListener('open', function(e) {
+
 var activity = $.index.activity;
 if (Ti.Platform.Android){ 
 if( Alloy.Globals.Android.Api >= 11 ) {
@@ -30,23 +31,19 @@ if( Alloy.Globals.Android.Api >= 11 ) {
 		}; 
 	}
 };
-// LOGOUT/LOGIN EN MENULEFT
-toggleLogin();
+
 });
-toggleLogin = function(GLOBAL) {
- 	if (Ti.App.Properties.getString('user_id') == 0){
-    	$.menuLogger.title = 'Iniciar Sesion';
-    	$.menuLogger.addEventListener('click', function (e){
-    		login();
-    	});
-    };
+var logger;
+$.index.addEventListener('focus', function(e) {
+	if (Ti.App.Properties.getString('user_id') == 0){
+		logger = 'loggedOut';
+	}
 	if (Ti.App.Properties.getString('user_id') > 0){
-    	$.menuLogger.title = 'Cerrar Sesion';
-    	$.menuLogger.addEventListener('click', function (e){
-    		logout();
-    	});
-   };
-};
+		logger = 'loggedIn';
+	}
+});
+// fin event listener focus
+$.index.open();
 // IOS MENU BUTTON
 
 function toggle() {
@@ -57,8 +54,23 @@ function toggle() {
 }; 
 
 
-$.index.open();
-
+function toggleLogin () {
+	 	if (Ti.App.Properties.getString('user_id') == 0){
+	    	$.menuLogger.title = 'Iniciar Sesion';
+	    	$.menuLogger.addEventListener('click', function (e){
+	    		
+	    		Alloy.createController("login").getView().open();
+	    	});
+	    } 
+	    if (Ti.App.Properties.getString('user_id') > 0 ){	
+	    	$.menuLogger.title = 'Cerrar Sesion';
+	    	$.menuLogger.addEventListener('click', function (e){
+	    		Ti.App.Properties.setString('user_id', '0');
+	    		return;
+	   		});
+	   	}
+	   
+	};
 function next() {
     if(Alloy.Globals.USERID == 0 || Ti.App.Properties.getString('user_id') == 0){
 	Alloy.createController("portal").getView().open();
@@ -67,14 +79,8 @@ function next() {
   	};
 };
 //LOGIN LOGOUT FUNCTIONS
-function logout() {
-    Ti.App.Properties.setString('user_id', '0');
-    alert('Sesion cerrada con exito!');
-    $.menuLogger.title = 'Iniciar Sesion';
-};
-function login() {
-    Alloy.createController("login").getView().open();
-};
+
+
 
 //SLIDER
 var animateRight = Ti.UI.createAnimation({
@@ -189,6 +195,7 @@ $.leftMenu.addEventListener('touchmove', moveTouch);
 
 
 function toggleLeftSlider () {
+	toggleLogin();
 	if (!hasSlided) {
 		direction = "right";
 		if (Titanium.Platform.osname == "iOS") {
@@ -206,25 +213,11 @@ function toggleLeftSlider () {
 	}
 	Ti.App.fireEvent("sliderToggled", {
 		hasSlided : hasSlided,
-		direction : direction
+		direction : direction,
 	});
 };
 
-function toggleRightSlider () {
-	if (!hasSlided) {
-		direction = "left";
-		$.movableView.animate(animateLeft);
-		hasSlided = true;
-	} else {
-		direction = "reset";
-		$.movableView.animate(animateReset);
-		hasSlided = false;
-	}
-	Ti.App.fireEvent("sliderToggled", {
-		hasSlided : hasSlided,
-		direction : direction
-    });
-};
+
 
 ////
 // END SLIDER!!!!

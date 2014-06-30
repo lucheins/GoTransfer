@@ -82,9 +82,7 @@ $.buttonLogin.addEventListener('click',function(e) {
 					    tc: Alloy.Globals.USER_MOBILE.toString(),
 					    u:  user1.toString()
 					};
-					client.send(params); 
-					
-				
+					client.send(params); 		
 		    }
 	    } 
     }  
@@ -107,7 +105,9 @@ function openWindowsLoginSuccess()
     
     var win = Alloy.createController('bookForm').getView();
     win.open();
-    GLOBAL.toggleLogin();
 	$.login.close();     	  
 }
-
+$.login.addEventListener('android:back', function(e) {
+    Ti.API.info("Log: back button from login to home");
+ 	Alloy.createController('index').getView();
+  });

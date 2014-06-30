@@ -5,6 +5,21 @@ function Controller() {
             toggleLeftSlider();
         }
     }
+    function toggleLogin() {
+        if (0 == Ti.App.Properties.getString("user_id") && "loggedOut" == logger) {
+            $.menuLogger.title = "Iniciar Sesion";
+            $.menuLogger.addEventListener("click", function() {
+                Alloy.createController("login").getView().open();
+            });
+        }
+        if (Ti.App.Properties.getString("user_id") > 0) {
+            $.menuLogger.title = "Cerrar Sesion";
+            $.menuLogger.addEventListener("click", function() {
+                Ti.App.Properties.setString("user_id", "0");
+                logger = "loggedOut";
+            });
+        }
+    }
     function next() {
         0 == Alloy.Globals.USERID || 0 == Ti.App.Properties.getString("user_id") ? Alloy.createController("portal").getView().open() : Alloy.createController("bookForm").getView().open();
     }
@@ -51,6 +66,7 @@ function Controller() {
         }
     }
     function toggleLeftSlider() {
+        toggleLogin();
         if (hasSlided) {
             direction = "reset";
             "iOS" == Titanium.Platform.osname && ($.leftButton.touchEnabled = true);
@@ -174,6 +190,11 @@ function Controller() {
                 }
             };
         }
+    });
+    var logger;
+    $.index.addEventListener("focus", function() {
+        0 == Ti.App.Properties.getString("user_id") && (logger = "loggedOut");
+        Ti.App.Properties.getString("user_id") > 0 && (logger = "loggedIn");
     });
     $.index.open();
     var animateRight = Ti.UI.createAnimation({

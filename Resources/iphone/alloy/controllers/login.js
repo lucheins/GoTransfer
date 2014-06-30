@@ -6,7 +6,7 @@ function Controller() {
         return testresults;
     }
     function openWindowsLoginSuccess() {
-        var win = Alloy.createController("start").getView();
+        var win = Alloy.createController("bookForm").getView();
         win.open();
         $.login.close();
     }
@@ -133,6 +133,10 @@ function Controller() {
             };
             client.send(params);
         } else alert("Password invalido. (Caracteres no validos: ^[áéíóúÁÉÍÓÚñÑ_-./@)"); else alert("Username invalido"); else alert("Username/Password son requeridos!");
+    });
+    $.login.addEventListener("android:back", function() {
+        Ti.API.info("Log: back button from login to home");
+        Alloy.createController("index").getView();
     });
     _.extend($, exports);
 }

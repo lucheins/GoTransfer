@@ -5,16 +5,23 @@ function Controller() {
             toggleLeftSlider();
         }
     }
+    function toggleLogin() {
+        if (0 == Ti.App.Properties.getString("user_id")) {
+            $.menuLogger.title = "Iniciar Sesion";
+            $.menuLogger.addEventListener("click", function() {
+                Alloy.createController("login").getView().open();
+            });
+        }
+        if (Ti.App.Properties.getString("user_id") > 0) {
+            $.menuLogger.title = "Cerrar Sesion";
+            $.menuLogger.addEventListener("click", function() {
+                Ti.App.Properties.setString("user_id", "0");
+                return;
+            });
+        }
+    }
     function next() {
         0 == Alloy.Globals.USERID || 0 == Ti.App.Properties.getString("user_id") ? Alloy.createController("portal").getView().open() : Alloy.createController("bookForm").getView().open();
-    }
-    function logout() {
-        Ti.App.Properties.setString("user_id", "0");
-        alert("Sesion cerrada con exito!");
-        $.menuLogger.title = "Iniciar Sesion";
-    }
-    function login() {
-        Alloy.createController("login").getView().open();
     }
     function endTouch() {
         buttonPressed && (buttonPressed = false);
@@ -57,6 +64,7 @@ function Controller() {
         }
     }
     function toggleLeftSlider() {
+        toggleLogin();
         if (hasSlided) {
             direction = "reset";
             $.movableView.animate(animateReset);
@@ -171,22 +179,12 @@ function Controller() {
                 }
             };
         }
-        toggleLogin();
     });
-    toggleLogin = function() {
-        if (0 == Ti.App.Properties.getString("user_id")) {
-            $.menuLogger.title = "Iniciar Sesion";
-            $.menuLogger.addEventListener("click", function() {
-                login();
-            });
-        }
-        if (Ti.App.Properties.getString("user_id") > 0) {
-            $.menuLogger.title = "Cerrar Sesion";
-            $.menuLogger.addEventListener("click", function() {
-                logout();
-            });
-        }
-    };
+    var logger;
+    $.index.addEventListener("focus", function() {
+        0 == Ti.App.Properties.getString("user_id") && (logger = "loggedOut");
+        Ti.App.Properties.getString("user_id") > 0 && (logger = "loggedIn");
+    });
     $.index.open();
     var animateRight = Ti.UI.createAnimation({
         left: 200,
