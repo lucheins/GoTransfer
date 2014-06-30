@@ -1,8 +1,17 @@
-$.login.addEventListener('android:back', function(e) {
-    Ti.API.info("Log: The Android back button was pressed - window not closed");
- // do nothing
- return false;
-  });
+$.login.addEventListener('open', function(e) {
+	var activity = $.login.activity;
+	if (Ti.Platform.Android){ 
+	if( Alloy.Globals.Android.Api >= 11 ) {
+	        activity.actionBar.title = "Ingreso";
+	        activity.actionBar.displayHomeAsUp = true; 
+	        activity.actionBar.onHomeIconItemSelected = function() { 
+			$.login.close();
+			$.login = null;
+			
+			};
+		}
+	};
+});
 
 
 var user_id = 0;
@@ -44,8 +53,6 @@ $.buttonLogin.addEventListener('click',function(e) {
 	        	Ti.App.Properties.setString('email', response.email); 
 	        	
 	        	openWindowsLoginSuccess();
-	        
-	  
 	    }
 	    else  
 	    {  
@@ -66,7 +73,7 @@ $.buttonLogin.addEventListener('click',function(e) {
         {  
 	        if (!checkdata($.password.value))  
 	        {  
-	             alert("Password invalido. (Caracteres no validos: ^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_-.\@)");  
+	             alert("Password invalido. (Caracteres no validos: ^[áéíóúÁÉÍÓÚñÑ_-.\/@)");  
 	        } else
         	{
         		
@@ -98,9 +105,9 @@ function openWindowsLoginSuccess()
 	// };        	
     // var win = Alloy.createController('start', args).getView();
     
-    var win = Alloy.createController('start').getView();
+    var win = Alloy.createController('bookForm').getView();
     win.open();
-    
+    GLOBAL.toggleLogin();
 	$.login.close();     	  
 }
 

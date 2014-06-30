@@ -1,5 +1,28 @@
+$.username.addEventListener('blur',function(e){
+	var client = Ti.Network.createHTTPClient();
+	var url = Alloy.Globals.DOMAIN + Alloy.Globals.URL_REGISTER;
+	client.open('POST',url);
 
+	client.onload = function(e){
+	     // $.activity.show(); 
+	     	var json = this.responseText;
+			var response = JSON.parse(json);
+			  
+			if (response.result == "NICKEXISTS")  
+	    	{ 
+	    	alert('Nickname ocupado. Escoja otro nickname!');
+	    	}
+	    		
+	};
+	var params = {
+		tc: Alloy.Globals.USER_MOBILE.toString(),
+		username: $.username.value,
+		};
+	client.send(params); 
+});
 $.buttonRegister.addEventListener('click',function(e) {
+	if($.pass1.value == ''){ alert('Por favor, introduzca su clave de usuario');
+	} else {
 	var client = Ti.Network.createHTTPClient();
 	var url = Alloy.Globals.DOMAIN + Alloy.Globals.URL_REGISTER;
 	client.open('POST',url);
@@ -9,17 +32,20 @@ $.buttonRegister.addEventListener('click',function(e) {
 	client.onload = function(){	
 		var json = this.responseText;
 		var response = JSON.parse(json);
-		alert(response);
 		if (response.result == "OK")  
-	    {  
-	         
+	    { 
 	        	//Ti.App.Properties.setString('username', response.username);
 	        	alert('Registrado!');	
 	        	
 	    }
 	    else  
 	    {  
-	        alert('No Registrado!');
+	        if (response.result == "NICKEXISTS")  
+		    	{ 
+		    	alert('Nickname ocupado. Escoja otro nickname!');
+		    	} else {
+	    	alert(response);
+	    		}
 	        // $.activity.hide();
 		}; 
 		 
@@ -63,5 +89,6 @@ $.buttonRegister.addEventListener('click',function(e) {
 		passwd: $.pass1.value,
 		email: $.email.value,
 		};
-	client.send(params); 	
+	client.send(params); 
+	};	
 });

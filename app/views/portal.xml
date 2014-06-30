@@ -1,0 +1,6 @@
+<Alloy>
+	<Window id="portal" backgroundColor="white">
+	<Button class="button" onClick="login" top="60dp">Iniciar Sesion</Button>
+	<Button class="button" onClick="register" top="120dp">Registrarse</Button>
+	</Window>
+</Alloy>

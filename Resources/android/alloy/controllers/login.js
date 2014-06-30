@@ -1,13 +1,14 @@
 function Controller() {
     function checkdata(value) {
         var testresults = false;
-        var filter = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\_\-\.\@\/]+$/;
+        var filter = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s\_\-\.\@\/]+/;
         filter.test(value) && (testresults = true);
         return testresults;
     }
     function openWindowsLoginSuccess() {
-        var win = Alloy.createController("start").getView();
+        var win = Alloy.createController("bookForm").getView();
         win.open();
+        GLOBAL.toggleLogin();
         $.login.close();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -83,11 +84,23 @@ function Controller() {
         id: "textBottom"
     });
     $.__views.buttonLogin.add($.__views.textBottom);
+    $.__views.fbButton = Alloy.Globals.Facebook.createLoginButton({
+        id: "fbButton",
+        ns: "Alloy.Globals.Facebook"
+    });
+    $.__views.container.add($.__views.fbButton);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.login.addEventListener("android:back", function() {
-        Ti.API.info("Log: The Android back button was pressed - DONT CLOSE THIS WINDOW SOMETHING!!!!");
-        return false;
+    $.login.addEventListener("open", function() {
+        var activity = $.login.activity;
+        if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
+            activity.actionBar.title = "Ingreso";
+            activity.actionBar.displayHomeAsUp = true;
+            activity.actionBar.onHomeIconItemSelected = function() {
+                $.login.close();
+                $.login = null;
+            };
+        }
     });
     var user_id = 0;
     $.username.autocorrect = false;
@@ -99,7 +112,7 @@ function Controller() {
         client.onload = function() {
             var json = this.responseText;
             var response = JSON.parse(json);
-            if ("undefined" == typeof response.id) alert("Failed credentials"); else {
+            if ("undefined" == typeof response.id) alert("Credenciales invalidas/Usuario no activado. Por favor intenta de nuevo!"); else {
                 $.username.blur();
                 $.password.blur();
                 user_id = response.id;
@@ -114,13 +127,13 @@ function Controller() {
             alert("Transmission error: " + e.error);
         };
         if ("" != $.username.value && "" != $.password.value) if (checkdata($.username.value)) if (checkdata($.password.value)) {
-            var user1 = Ti.Utils.base64encode($.username.value + "$#$" + $.password.value);
+            var user1 = Ti.Utils.base64encode($.username.value + "$@$" + $.password.value);
             var params = {
                 tc: Alloy.Globals.USER_MOBILE.toString(),
                 u: user1.toString()
             };
             client.send(params);
-        } else alert("Please enter a valid password"); else alert("Please enter a valid username"); else alert("Username/Password son requeridos!");
+        } else alert("Password invalido. (Caracteres no validos: ^[áéíóúÁÉÍÓÚñÑ_-./@)"); else alert("Username invalido"); else alert("Username/Password son requeridos!");
     });
     _.extend($, exports);
 }

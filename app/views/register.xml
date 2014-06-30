@@ -3,9 +3,9 @@
 		<ActivityIndicator id="activity"/>
 		<View id="registerForm">
 			<TextField id="name" />
-			<TextField id="username" />
+			<TextField id="username" autocapitalization="false"/>
 			<TextField id="pass1" />
-			<TextField id="email" />
+			<TextField id="email" autocapitalization="false"/>
 			<!-- <Label id="sexLabel">Select your current timezone</Label> -->
 			<!-- <Picker id="pickSex" >
 	            <PickerRow value='masculino' title='Masculino' />

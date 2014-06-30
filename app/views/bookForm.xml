@@ -1,0 +1,7 @@
+<Alloy>
+	<Window id="bookForm" backgroundColor="white">
+		<View class="container">
+			<Button class="button" onClick="logout" top="60dp">Logout</Button>
+		</View>
+	</Window>
+</Alloy>

@@ -83,11 +83,23 @@ function Controller() {
         id: "textBottom"
     });
     $.__views.buttonLogin.add($.__views.textBottom);
+    $.__views.fbButton = Alloy.Globals.Facebook.createLoginButton({
+        id: "fbButton",
+        ns: "Alloy.Globals.Facebook"
+    });
+    $.__views.container.add($.__views.fbButton);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.login.addEventListener("android:back", function() {
-        Ti.API.info("Log: The Android back button was pressed - window not closed");
-        return false;
+    $.login.addEventListener("open", function() {
+        var activity = $.login.activity;
+        if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
+            activity.actionBar.title = "Ingreso";
+            activity.actionBar.displayHomeAsUp = true;
+            activity.actionBar.onHomeIconItemSelected = function() {
+                $.login.close();
+                $.login = null;
+            };
+        }
     });
     var user_id = 0;
     $.username.autocorrect = false;
@@ -120,7 +132,7 @@ function Controller() {
                 u: user1.toString()
             };
             client.send(params);
-        } else alert("Password invalido. (Caracteres no validos: ^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_-.@)"); else alert("Username invalido"); else alert("Username/Password son requeridos!");
+        } else alert("Password invalido. (Caracteres no validos: ^[áéíóúÁÉÍÓÚñÑ_-./@)"); else alert("Username invalido"); else alert("Username/Password son requeridos!");
     });
     _.extend($, exports);
 }

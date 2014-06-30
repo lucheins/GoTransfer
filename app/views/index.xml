@@ -1,7 +1,27 @@
 <Alloy>
-    <Window id="index">
+    <Window id="index" >
         <!-- Use the Alloy.Globals.Facebook namespace to create a Facebook module login button -->
-        <Button class="button" onClick="next" top="60dp">Log Out</Button>
-        <LoginButton id="fbButton" ns="Alloy.Globals.Facebook"/>
+        
+        <View id="containerview" >
+       	<Button class="button" id="leftButton" top="10dp" onClick="toggle" platform="ios">Menu</Button>
+        <View id="leftMenu">
+						<TableView id="tableMenu" scrollable="false" footerTitle="" left="0">
+							<TableViewSection rowCount="1">
+								<TableViewRow title="Cuenta" class="headerLabel" height="24" indentionLevel="0">
+								<TableViewRow class="menuRow" height="46" indentionLevel="1" id="menuLogger" />
+								<!-- <TableViewRow title="Nombre" class="menuRow" height="46" indentionLevel="1"/>
+								<TableViewRow title="Auto" class="menuRow" height="46" indentionLevel="1"/>
+							</TableViewSection>
+							<TableViewSection rowCount="3">
+								<TableViewRow title="Opciones de Parqueo" class="headerLabel" height="34" indentionLevel="0">
+								<TableViewRow title="Prepago - Zona Azul" class="menuRow" height="46" indentionLevel="1"/>
+								<TableViewRow title="Postpago - Parquedero" class="menuRow" height="46" indentionLevel="1"/> -->	
+							</TableViewSection>
+						</TableView>
+		</View>
+		<View id="movableView" backgroundColor="white">
+        	<Button class="button" onClick="next" top="60dp">Pedir Transfer</Button>
+        </View>
+         </View>
     </Window>
 </Alloy>
