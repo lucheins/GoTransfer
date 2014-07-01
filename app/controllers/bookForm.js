@@ -22,9 +22,9 @@ function next() {
 	}
 };
 
-$.login.addEventListener('android:back', function(e) {
+$.bookForm.addEventListener('android:back', function(e) {
     Ti.API.info("Log: back button from login to home");
  	$.bookForm.close();
  	$.bookForm = null;
-	win.open();
+	index.open();
   });
