@@ -23,7 +23,7 @@ function Controller() {
     $.__views.__alloyId0.add($.__views.__alloyId1);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Alloy.createController("index").getView();
+    var index = Alloy.createController("index").getView();
     $.bookForm.addEventListener("open", function() {
         var activity = $.bookForm.activity;
         if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
@@ -36,11 +36,11 @@ function Controller() {
             };
         }
     });
-    $.login.addEventListener("android:back", function() {
+    $.bookForm.addEventListener("android:back", function() {
         Ti.API.info("Log: back button from login to home");
         $.bookForm.close();
         $.bookForm = null;
-        win.open();
+        index.open();
     });
     _.extend($, exports);
 }

@@ -9,6 +9,7 @@ function Controller() {
         var win = Alloy.createController("bookForm").getView();
         win.open();
         $.login.close();
+        $.login = null;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "login";
@@ -83,11 +84,6 @@ function Controller() {
         id: "textBottom"
     });
     $.__views.buttonLogin.add($.__views.textBottom);
-    $.__views.fbButton = Alloy.Globals.Facebook.createLoginButton({
-        id: "fbButton",
-        ns: "Alloy.Globals.Facebook"
-    });
-    $.__views.container.add($.__views.fbButton);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.login.addEventListener("open", function() {
@@ -137,6 +133,8 @@ function Controller() {
     $.login.addEventListener("android:back", function() {
         Ti.API.info("Log: back button from login to home");
         Alloy.createController("index").getView();
+        $.login.close();
+        $.login = null;
     });
     _.extend($, exports);
 }
