@@ -1,4 +1,70 @@
-
-".container" : {
-  
+"#desde":{
+	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
+	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
+	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
+	color: '#336699',
+	hintText: 'Desde',
+	top: '20%',
+	width: '50%',
+	height: '10%',
+	left: '5%',
+	border: 1,
+	borderColor: '#c1c1c1',
+	paddingLeft: 5
+},
+"#pickUp":{
+	top: '20%',
+	width: '10dp',
+	right: '5%',
+	height: '10%',
+	backgroundColor: 'blue'
+},
+"#dropOff":{
+	top: '40%',
+	width: '10dp',
+	right: '5%',
+	height: '10%',
+	backgroundColor: 'blue'
+},
+"#hasta":{
+	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
+	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
+	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
+	color: '#336699',
+	hintText: 'Hasta',
+	top: '40%',
+	width: '50%',
+	height: '10%',
+	left: '5%',
+	border: 1,
+	borderColor: '#c1c1c1',
+	paddingLeft: 5
+},
+"#when":{
+	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
+	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
+	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
+	color: '#336699',
+	hintText: 'Hoy',
+	top: '60%',
+	width: '50%',
+	height: '10%',
+	left: '5%',
+	border: 1,
+	borderColor: '#c1c1c1',
+	paddingLeft: 5
+},
+"#howMany":{
+	borderStyle: 'Ti.UI.INPUT_BORDERSTYLE_ROUNDED',
+	keyboardType: 'Titanium.UI.KEYBOARD_DEFAULT',
+	returnKeyType: 'Titanium.UI.RETURNKEY_DEFAULT',
+	color: '#336699',
+	hintText: 'Pasajeros',
+	top: '90%',
+	width: '50%',
+	height: '10%',
+	left: '5%',
+	border: 1,
+	borderColor: '#c1c1c1',
+	paddingLeft: 5
 }

@@ -124,27 +124,27 @@ function Controller() {
         id: "leftMenu"
     });
     $.__views.containerview.add($.__views.leftMenu);
-    var __alloyId2 = [];
-    $.__views.__alloyId3 = Ti.UI.createTableViewSection({
+    var __alloyId1 = [];
+    $.__views.__alloyId2 = Ti.UI.createTableViewSection({
         rowCount: "1",
-        id: "__alloyId3"
+        id: "__alloyId2"
     });
-    __alloyId2.push($.__views.__alloyId3);
-    $.__views.__alloyId4 = Ti.UI.createTableViewRow({
+    __alloyId1.push($.__views.__alloyId2);
+    $.__views.__alloyId3 = Ti.UI.createTableViewRow({
         title: "Cuenta",
         height: "24",
         indentionLevel: "0",
-        id: "__alloyId4"
+        id: "__alloyId3"
     });
-    $.__views.__alloyId3.add($.__views.__alloyId4);
+    $.__views.__alloyId2.add($.__views.__alloyId3);
     $.__views.menuLogger = Ti.UI.createTableViewRow({
         height: "46",
         indentionLevel: "1",
         id: "menuLogger"
     });
-    $.__views.__alloyId3.add($.__views.menuLogger);
+    $.__views.__alloyId2.add($.__views.menuLogger);
     $.__views.tableMenu = Ti.UI.createTableView({
-        data: __alloyId2,
+        data: __alloyId1,
         id: "tableMenu",
         scrollable: "false",
         footerTitle: "",
@@ -159,13 +159,13 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.containerview.add($.__views.movableView);
-    $.__views.__alloyId5 = Ti.UI.createButton({
+    $.__views.__alloyId4 = Ti.UI.createButton({
         title: "Pedir Transfer",
         top: "60dp",
-        id: "__alloyId5"
+        id: "__alloyId4"
     });
-    $.__views.movableView.add($.__views.__alloyId5);
-    next ? $.__views.__alloyId5.addEventListener("click", next) : __defers["$.__views.__alloyId5!click!next"] = true;
+    $.__views.movableView.add($.__views.__alloyId4);
+    next ? $.__views.__alloyId4.addEventListener("click", next) : __defers["$.__views.__alloyId4!click!next"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.index.addEventListener("android:back", function() {
@@ -227,7 +227,7 @@ function Controller() {
         alert("Sesion cerrada con exito!");
     };
     __defers["$.__views.leftButton!click!toggle"] && $.__views.leftButton.addEventListener("click", toggle);
-    __defers["$.__views.__alloyId5!click!next"] && $.__views.__alloyId5.addEventListener("click", next);
+    __defers["$.__views.__alloyId4!click!next"] && $.__views.__alloyId4.addEventListener("click", next);
     _.extend($, exports);
 }
 

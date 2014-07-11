@@ -6,7 +6,7 @@ function Controller() {
         return testresults;
     }
     function openWindowsLoginSuccess() {
-        var win = Alloy.createController("bookForm").getView();
+        var win = Alloy.createController("index").getView();
         win.open();
         $.login.close();
         $.login = null;

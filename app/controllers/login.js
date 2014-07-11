@@ -103,7 +103,7 @@ function openWindowsLoginSuccess()
 	// };        	
     // var win = Alloy.createController('start', args).getView();
     
-    var win = Alloy.createController('bookForm').getView();
+    var win = Alloy.createController('index').getView();
     win.open();
 	$.login.close();
 	$.login = null;	  

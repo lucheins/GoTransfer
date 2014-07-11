@@ -15,36 +15,36 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.startWin && $.addTopLevelView($.__views.startWin);
-    $.__views.__alloyId18 = Ti.UI.createButton({
+    $.__views.__alloyId38 = Ti.UI.createButton({
         title: "Cancel",
         top: "30dp",
-        id: "__alloyId18"
+        id: "__alloyId38"
     });
-    $.__views.startWin.add($.__views.__alloyId18);
-    closeWindow ? $.__views.__alloyId18.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId18!click!closeWindow"] = true;
+    $.__views.startWin.add($.__views.__alloyId38);
+    closeWindow ? $.__views.__alloyId38.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId38!click!closeWindow"] = true;
     $.__views.footer = Ti.UI.createView({
         id: "footer",
         height: "40dp"
     });
     $.__views.startWin.add($.__views.footer);
-    var __alloyId20 = [];
-    var __alloyId24 = {
+    var __alloyId40 = [];
+    var __alloyId44 = {
         title: "All",
         ns: "Alloy.Abstract"
     };
-    __alloyId20.push(__alloyId24);
-    var __alloyId25 = {
+    __alloyId40.push(__alloyId44);
+    var __alloyId45 = {
         title: "Active",
         ns: "Alloy.Abstract"
     };
-    __alloyId20.push(__alloyId25);
-    var __alloyId26 = {
+    __alloyId40.push(__alloyId45);
+    var __alloyId46 = {
         title: "Done",
         ns: "Alloy.Abstract"
     };
-    __alloyId20.push(__alloyId26);
+    __alloyId40.push(__alloyId46);
     $.__views.tabbedbar = Ti.UI.iOS.createTabbedBar({
-        labels: __alloyId20,
+        labels: __alloyId40,
         id: "tabbedbar"
     });
     $.__views.footer.add($.__views.tabbedbar);
@@ -67,7 +67,7 @@ function Controller() {
             };
         }
     });
-    __defers["$.__views.__alloyId18!click!closeWindow"] && $.__views.__alloyId18.addEventListener("click", closeWindow);
+    __defers["$.__views.__alloyId38!click!closeWindow"] && $.__views.__alloyId38.addEventListener("click", closeWindow);
     _.extend($, exports);
 }
 

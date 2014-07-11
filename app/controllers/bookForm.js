@@ -10,7 +10,7 @@ $.bookForm.addEventListener('open', function(e) {
 	        activity.actionBar.onHomeIconItemSelected = function() { 
 			$.bookForm.close();
 			$.bookForm = null;
-			win.open();
+			index.open();
 			};
 		}
 	};
@@ -20,6 +20,10 @@ function next() {
     if(Ti.App.Properties.getString('user_id') == 0){
 	Alloy.createController("index").getView().open();
 	}
+};
+
+function searchLoc() {
+	Alloy.createController("searchLocation").getView().open();
 };
 
 $.bookForm.addEventListener('android:back', function(e) {

@@ -1,7 +1,10 @@
 <Alloy>
-	<Window id="bookForm" backgroundColor="white">
+	<Window id="bookForm">
 		<View class="container">
-			<Button class="button" top="60dp">Aqui va el formulario</Button>
+			<TextField id="desde" /><View id="pickUp" onClick="searchLoc"/>
+			<TextField id="hasta" /><View id="dropOff" onClick="searchLoc" />
+			<TextField id="when" />
+			<TextField id="howMany" />
 		</View>
 	</Window>
 </Alloy>
