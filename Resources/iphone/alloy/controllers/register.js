@@ -11,14 +11,22 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.register && $.addTopLevelView($.__views.register);
+    $.__views.movableView = Ti.UI.createView({
+        top: 40,
+        zIndex: 100,
+        width: "100%",
+        id: "movableView",
+        backgroundColor: "white"
+    });
+    $.__views.register.add($.__views.movableView);
     $.__views.activity = Ti.UI.createActivityIndicator({
         id: "activity"
     });
-    $.__views.register.add($.__views.activity);
+    $.__views.movableView.add($.__views.activity);
     $.__views.registerForm = Ti.UI.createView({
         id: "registerForm"
     });
-    $.__views.register.add($.__views.registerForm);
+    $.__views.movableView.add($.__views.registerForm);
     $.__views.name = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",

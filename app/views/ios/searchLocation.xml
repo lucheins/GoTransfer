@@ -1,0 +1,33 @@
+<Alloy>
+	<Window id="pickPlace" onClick="row">
+		<View id="movableView" backgroundColor="white">
+			<ScrollableView id="scrollableView">
+				<View id="starred">
+					<TableView>
+						<TableViewRow title="Casa"/>
+						<TableViewRow title="Trabajo"/>
+						<TableViewRow title="Suegros"/>
+					</TableView>
+				</View>
+				<View id="air">
+					<TableView filterAttribute="title">
+					<!-- <SearchBar backgroundColor="white" hintText="Busqueda rapida" onFocus="clear" id="searchPlace" onBlur="fill" color="black"/> -->
+					<TableViewSection headerTitle="Aeropuertos">
+						<TableViewRow title="UIO - Quito Mariscal Sucre "/>
+						<TableViewRow title="GYE - Guayaquil Simon Bolivar"/>
+						<TableViewRow title="CUE - Cuenca"/>
+					</TableViewSection>
+					<!-- <TableViewSection headerTitle="Internacionales">
+						<TableViewRow title="Mia"/>
+						<TableViewRow title="Row 2"/>
+						<TableViewRow title="Row 3"/>
+					</TableViewSection> -->
+					</TableView>
+				</View>
+				<View id="address">
+					<Label>Address</Label>
+				</View>
+			</ScrollableView>
+		</View>
+	</Window>		
+</Alloy>

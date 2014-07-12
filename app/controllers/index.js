@@ -33,7 +33,7 @@ if( Alloy.Globals.Android.Api >= 11 ) {
 };
 
 });
-// fin event listener focus
+
 $.index.open();
 // IOS MENU BUTTON
 
@@ -49,6 +49,7 @@ function toggle() {
 function next() {
     if(Ti.App.Properties.getString('user_id') == 0){
 	Alloy.createController("portal").getView().open();
+	Ti.App.Properties.setString('loginFrom', 'index');
 	} else { 
     Alloy.createController("bookForm").getView().open();
   	};
@@ -170,7 +171,8 @@ $.leftMenu.addEventListener('touchmove', moveTouch);
 
 var toggleLogin = function() {
 	$.menuLogger.removeEventListener('click', toggleLogin);
-	Alloy.createController("login").getView().open();
+	Ti.App.Properties.setString('loginFrom', 'leftmenu');
+	Alloy.createController("login").getView().open();	
 };
 var toggleLogout = function() {
 	$.menuLogger.removeEventListener('click', toggleLogout);

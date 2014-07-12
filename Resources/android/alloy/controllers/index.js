@@ -6,7 +6,10 @@ function Controller() {
         }
     }
     function next() {
-        0 == Ti.App.Properties.getString("user_id") ? Alloy.createController("portal").getView().open() : Alloy.createController("bookForm").getView().open();
+        if (0 == Ti.App.Properties.getString("user_id")) {
+            Alloy.createController("portal").getView().open();
+            Ti.App.Properties.setString("loginFrom", "index");
+        } else Alloy.createController("bookForm").getView().open();
     }
     function endTouch() {
         buttonPressed && (buttonPressed = false);
@@ -208,6 +211,7 @@ function Controller() {
     $.leftMenu.addEventListener("touchmove", moveTouch);
     var toggleLogin = function() {
         $.menuLogger.removeEventListener("click", toggleLogin);
+        Ti.App.Properties.setString("loginFrom", "leftmenu");
         Alloy.createController("login").getView().open();
     };
     var toggleLogout = function() {

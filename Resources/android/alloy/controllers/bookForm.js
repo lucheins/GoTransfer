@@ -1,6 +1,9 @@
 function Controller() {
-    function searchLoc() {
-        Alloy.createController("searchLocation").getView().open();
+    function searchLoc(e) {
+        var arg = {
+            clicked: e.source.id
+        };
+        Alloy.createController("searchLocation", arg).getView().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "bookForm";
@@ -14,32 +17,42 @@ function Controller() {
         id: "bookForm"
     });
     $.__views.bookForm && $.addTopLevelView($.__views.bookForm);
+    $.__views.movableView = Ti.UI.createView({
+        top: 0,
+        zIndex: 100,
+        width: "100%",
+        id: "movableView",
+        backgroundColor: "white"
+    });
+    $.__views.bookForm.add($.__views.movableView);
     $.__views.__alloyId0 = Ti.UI.createView({
         id: "__alloyId0"
     });
-    $.__views.bookForm.add($.__views.__alloyId0);
+    $.__views.movableView.add($.__views.__alloyId0);
     $.__views.desde = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
         returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Desde",
-        top: "20%",
-        width: "50%",
+        top: "5%",
+        width: "70%",
         height: "10%",
         left: "5%",
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "desde"
+        id: "desde",
+        enabled: "false"
     });
     $.__views.__alloyId0.add($.__views.desde);
+    searchLoc ? $.__views.desde.addEventListener("click", searchLoc) : __defers["$.__views.desde!click!searchLoc"] = true;
     $.__views.pickUp = Ti.UI.createView({
-        top: "20%",
-        width: "10dp",
+        top: "5%",
+        width: "15%",
         right: "5%",
         height: "10%",
-        backgroundColor: "blue",
+        backgroundColor: "black",
         id: "pickUp"
     });
     $.__views.__alloyId0.add($.__views.pickUp);
@@ -50,22 +63,24 @@ function Controller() {
         returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Hasta",
-        top: "40%",
-        width: "50%",
+        top: "20%",
+        width: "70%",
         height: "10%",
         left: "5%",
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "hasta"
+        id: "hasta",
+        enabled: "false"
     });
     $.__views.__alloyId0.add($.__views.hasta);
+    searchLoc ? $.__views.hasta.addEventListener("click", searchLoc) : __defers["$.__views.hasta!click!searchLoc"] = true;
     $.__views.dropOff = Ti.UI.createView({
-        top: "40%",
-        width: "10dp",
+        top: "20%",
+        width: "15%",
         right: "5%",
         height: "10%",
-        backgroundColor: "blue",
+        backgroundColor: "black",
         id: "dropOff"
     });
     $.__views.__alloyId0.add($.__views.dropOff);
@@ -76,14 +91,15 @@ function Controller() {
         returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Hoy",
-        top: "60%",
-        width: "50%",
+        top: "35%",
+        width: "70%",
         height: "10%",
         left: "5%",
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "when"
+        id: "when",
+        enabled: "false"
     });
     $.__views.__alloyId0.add($.__views.when);
     $.__views.howMany = Ti.UI.createTextField({
@@ -92,8 +108,8 @@ function Controller() {
         returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Pasajeros",
-        top: "90%",
-        width: "50%",
+        top: "50%",
+        width: "70%",
         height: "10%",
         left: "5%",
         border: 1,
@@ -104,6 +120,7 @@ function Controller() {
     $.__views.__alloyId0.add($.__views.howMany);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var args = arguments[0] || {};
     var index = Alloy.createController("index").getView();
     $.bookForm.addEventListener("open", function() {
         var activity = $.bookForm.activity;
@@ -111,19 +128,33 @@ function Controller() {
             activity.actionBar.title = "Datos del Transfer";
             activity.actionBar.displayHomeAsUp = true;
             activity.actionBar.onHomeIconItemSelected = function() {
+                Ti.App.Properties.setString("desde", "");
+                Ti.App.Properties.setString("hasta", "");
                 $.bookForm.close();
                 $.bookForm = null;
                 index.open();
             };
         }
+        if ("pickUp" == args.from || "desde" == args.from) {
+            $.desde.value = args.title || "";
+            Ti.App.Properties.setString("desde", args.title);
+        } else $.desde.value = Ti.App.Properties.getString("desde", args.title);
+        if ("dropOff" == args.from || "hasta" == args.from) {
+            $.hasta.value = args.title || "";
+            Ti.App.Properties.setString("hasta", args.title);
+        } else $.hasta.value = Ti.App.Properties.getString("hasta", args.title);
     });
     $.bookForm.addEventListener("android:back", function() {
         Ti.API.info("Log: back button from login to home");
+        Ti.App.Properties.setString("desde", "");
+        Ti.App.Properties.setString("hasta", "");
         $.bookForm.close();
         $.bookForm = null;
         index.open();
     });
+    __defers["$.__views.desde!click!searchLoc"] && $.__views.desde.addEventListener("click", searchLoc);
     __defers["$.__views.pickUp!click!searchLoc"] && $.__views.pickUp.addEventListener("click", searchLoc);
+    __defers["$.__views.hasta!click!searchLoc"] && $.__views.hasta.addEventListener("click", searchLoc);
     __defers["$.__views.dropOff!click!searchLoc"] && $.__views.dropOff.addEventListener("click", searchLoc);
     _.extend($, exports);
 }

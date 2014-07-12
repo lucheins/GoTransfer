@@ -15,36 +15,44 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.startWin && $.addTopLevelView($.__views.startWin);
-    $.__views.__alloyId38 = Ti.UI.createButton({
+    $.__views.movableView = Ti.UI.createView({
+        top: 40,
+        zIndex: 100,
+        width: "100%",
+        id: "movableView",
+        backgroundColor: "white"
+    });
+    $.__views.startWin.add($.__views.movableView);
+    $.__views.__alloyId17 = Ti.UI.createButton({
         title: "Cancel",
         top: "30dp",
-        id: "__alloyId38"
+        id: "__alloyId17"
     });
-    $.__views.startWin.add($.__views.__alloyId38);
-    closeWindow ? $.__views.__alloyId38.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId38!click!closeWindow"] = true;
+    $.__views.movableView.add($.__views.__alloyId17);
+    closeWindow ? $.__views.__alloyId17.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId17!click!closeWindow"] = true;
     $.__views.footer = Ti.UI.createView({
         id: "footer",
         height: "40dp"
     });
-    $.__views.startWin.add($.__views.footer);
-    var __alloyId40 = [];
-    var __alloyId44 = {
+    $.__views.movableView.add($.__views.footer);
+    var __alloyId19 = [];
+    var __alloyId23 = {
         title: "All",
         ns: "Alloy.Abstract"
     };
-    __alloyId40.push(__alloyId44);
-    var __alloyId45 = {
+    __alloyId19.push(__alloyId23);
+    var __alloyId24 = {
         title: "Active",
         ns: "Alloy.Abstract"
     };
-    __alloyId40.push(__alloyId45);
-    var __alloyId46 = {
+    __alloyId19.push(__alloyId24);
+    var __alloyId25 = {
         title: "Done",
         ns: "Alloy.Abstract"
     };
-    __alloyId40.push(__alloyId46);
+    __alloyId19.push(__alloyId25);
     $.__views.tabbedbar = Ti.UI.iOS.createTabbedBar({
-        labels: __alloyId40,
+        labels: __alloyId19,
         id: "tabbedbar"
     });
     $.__views.footer.add($.__views.tabbedbar);
@@ -67,7 +75,7 @@ function Controller() {
             };
         }
     });
-    __defers["$.__views.__alloyId38!click!closeWindow"] && $.__views.__alloyId38.addEventListener("click", closeWindow);
+    __defers["$.__views.__alloyId17!click!closeWindow"] && $.__views.__alloyId17.addEventListener("click", closeWindow);
     _.extend($, exports);
 }
 

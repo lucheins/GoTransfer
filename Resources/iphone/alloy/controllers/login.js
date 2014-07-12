@@ -6,7 +6,7 @@ function Controller() {
         return testresults;
     }
     function openWindowsLoginSuccess() {
-        var win = Alloy.createController("bookForm").getView();
+        if ("index" == Ti.App.Properties.getString("loginFrom")) var win = Alloy.createController("bookForm").getView(); else var win = Alloy.createController("index").getView();
         win.open();
         $.login.close();
         $.login = null;
@@ -20,17 +20,25 @@ function Controller() {
     var exports = {};
     $.__views.login = Ti.UI.createWindow({
         id: "login",
-        backgroundColor: "white"
+        backgroundColor: "black"
     });
     $.__views.login && $.addTopLevelView($.__views.login);
+    $.__views.movableView = Ti.UI.createView({
+        top: 40,
+        zIndex: 100,
+        width: "100%",
+        id: "movableView",
+        backgroundColor: "white"
+    });
+    $.__views.login.add($.__views.movableView);
     $.__views.activity = Ti.UI.createActivityIndicator({
         id: "activity"
     });
-    $.__views.login.add($.__views.activity);
+    $.__views.movableView.add($.__views.activity);
     $.__views.container = Ti.UI.createView({
         id: "container"
     });
-    $.__views.login.add($.__views.container);
+    $.__views.movableView.add($.__views.container);
     $.__views.username = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
         keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",

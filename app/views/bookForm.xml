@@ -1,10 +1,12 @@
 <Alloy>
 	<Window id="bookForm">
-		<View class="container">
-			<TextField id="desde" /><View id="pickUp" onClick="searchLoc"/>
-			<TextField id="hasta" /><View id="dropOff" onClick="searchLoc" />
-			<TextField id="when" />
-			<TextField id="howMany" />
+		<View id="movableView" backgroundColor="white">
+			<View class="container">
+				<TextField id="desde" enabled="false" onClick="searchLoc"/><View id="pickUp" onClick="searchLoc"/>
+				<TextField id="hasta" enabled="false" onClick="searchLoc"/><View id="dropOff" onClick="searchLoc" />
+				<TextField id="when" enabled="false"/>
+				<TextField id="howMany" />
+			</View>
 		</View>
 	</Window>
 </Alloy>

@@ -1,1 +1,1 @@
-module.exports = [{"isClass":true,"priority":10000.0017,"key":"container","style":{}}];
+module.exports = [{"isId":true,"priority":100101.0023,"key":"movableView","style":{top:0,zIndex:100,width:"100%",}}];

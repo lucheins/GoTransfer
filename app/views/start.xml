@@ -1,22 +1,23 @@
 <Alloy>
 	<Window id="startWin"backgroundColor="white">
-  	
-  	<Button class="button" onClick="closeWindow" top="30dp">Cancel</Button>
-  	<View platform="ios" id="footer" height="40dp">
-      <TabbedBar  id="tabbedbar">
-        <Labels>
-          <Label>All</Label>
-          <Label>Active</Label>
-          <Label>Done</Label>
-        </Labels>
-      </TabbedBar>
-    </View>
-
-    <!-- Android: menu -->
-    <Menu platform="android">
-      <MenuItem title="All" />
-      <MenuItem title="Active" />
-      <MenuItem title="Done" />
-    </Menu>
+	  	<View id="movableView" backgroundColor="white">
+		  	<Button class="button" onClick="closeWindow" top="30dp">Cancel</Button>
+		  	<View platform="ios" id="footer" height="40dp">
+		      <TabbedBar  id="tabbedbar">
+		        <Labels>
+		          <Label>All</Label>
+		          <Label>Active</Label>
+		          <Label>Done</Label>
+		        </Labels>
+		      </TabbedBar>
+		    </View>
+		
+		    <!-- Android: menu -->
+		    <Menu platform="android">
+		      <MenuItem title="All" />
+		      <MenuItem title="Active" />
+		      <MenuItem title="Done" />
+		    </Menu>
+		  </View>
 	</Window>
 </Alloy>

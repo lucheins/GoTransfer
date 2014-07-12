@@ -1,0 +1,31 @@
+<Alloy>
+	<TabGroup id="pickPlace">
+		<Tab title="Mis Favoritos">
+			<Window id="starred" onClick="row">
+				<TableView>
+					<TableViewRow title="Casa"/>
+					<TableViewRow title="Trabajo"/>
+					<TableViewRow title="Suegros"/>
+				</TableView>
+			</Window>
+		</Tab>
+		<Tab title="Aeropuertos">
+			<Window id="air" onClick="row">
+				<TableView>
+					<TableViewRow title="UIO - Quito Mariscal Sucre "/>
+					<TableViewRow title="GYE - Guayaquil Simon Bolivar"/>
+					<TableViewRow title="CUE - Cuenca"/>
+				</TableView>
+			</Window>
+		</Tab>
+		<Tab title="Direccion">
+			<Window id="address" onClick="row">
+				<TableView>
+					<TableViewRow title="Casa"/>
+					<TableViewRow title="Trabajo"/>
+					<TableViewRow title="Suegros"/>
+				</TableView>
+			</Window>
+		</Tab>
+	</TabGroup>
+</Alloy>
