@@ -1,0 +1,1 @@
+module.exports = [{"isId":true,"priority":100101.0035,"key":"movableView","style":{top:40,zIndex:100,width:"100%",}}];

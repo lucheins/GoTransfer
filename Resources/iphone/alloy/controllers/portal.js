@@ -14,24 +14,31 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.portal = Ti.UI.createWindow({
-        id: "portal",
-        backgroundColor: "white"
+        id: "portal"
     });
     $.__views.portal && $.addTopLevelView($.__views.portal);
-    $.__views.__alloyId16 = Ti.UI.createButton({
+    $.__views.movableView = Ti.UI.createView({
+        top: 40,
+        zIndex: 100,
+        width: "100%",
+        id: "movableView",
+        backgroundColor: "white"
+    });
+    $.__views.portal.add($.__views.movableView);
+    $.__views.__alloyId15 = Ti.UI.createButton({
         title: "Iniciar Sesion",
         top: "60dp",
-        id: "__alloyId16"
+        id: "__alloyId15"
     });
-    $.__views.portal.add($.__views.__alloyId16);
-    login ? $.__views.__alloyId16.addEventListener("click", login) : __defers["$.__views.__alloyId16!click!login"] = true;
-    $.__views.__alloyId17 = Ti.UI.createButton({
+    $.__views.movableView.add($.__views.__alloyId15);
+    login ? $.__views.__alloyId15.addEventListener("click", login) : __defers["$.__views.__alloyId15!click!login"] = true;
+    $.__views.__alloyId16 = Ti.UI.createButton({
         title: "Registrarse",
         top: "120dp",
-        id: "__alloyId17"
+        id: "__alloyId16"
     });
-    $.__views.portal.add($.__views.__alloyId17);
-    register ? $.__views.__alloyId17.addEventListener("click", register) : __defers["$.__views.__alloyId17!click!register"] = true;
+    $.__views.movableView.add($.__views.__alloyId16);
+    register ? $.__views.__alloyId16.addEventListener("click", register) : __defers["$.__views.__alloyId16!click!register"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -46,8 +53,8 @@ function Controller() {
             };
         }
     });
-    __defers["$.__views.__alloyId16!click!login"] && $.__views.__alloyId16.addEventListener("click", login);
-    __defers["$.__views.__alloyId17!click!register"] && $.__views.__alloyId17.addEventListener("click", register);
+    __defers["$.__views.__alloyId15!click!login"] && $.__views.__alloyId15.addEventListener("click", login);
+    __defers["$.__views.__alloyId16!click!register"] && $.__views.__alloyId16.addEventListener("click", register);
     _.extend($, exports);
 }
 

@@ -19,6 +19,7 @@
     <analytics>true</analytics>
     <guid>d101f611-d200-4d80-b6e2-282f17ab3fb5</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
+<<<<<<< HEAD
     <ios>
         <plist>
             <dict>
@@ -51,6 +52,29 @@
             <!-- other manifest entries -->
         </manifest>
     </android>
+=======
+    <iphone>
+	    <orientations device="iphone">
+	        <orientation>Ti.UI.PORTRAIT</orientation>
+	        <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+	    </orientations>
+	    <orientations device="ipad">
+	        <orientation>Ti.UI.PORTRAIT</orientation>
+	        <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+	    </orientations>
+	</iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"> 
+		<tool-api-level>14</tool-api-level> 
+		<manifest> 
+			<uses-sdk android:targetSdkVersion="19" android:minSdkVersion="14"/> 
+			<!-- other manifest entries --> 
+			<application>
+			    <activity android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait" />  
+			</application>
+		</manifest> 
+		
+	</android> 
+>>>>>>> 9420786db9401752cec60a0adcc656663c5eef7f
     <mobileweb>
         <precache/>
         <splash>

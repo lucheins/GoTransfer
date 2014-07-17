@@ -1,7 +1,12 @@
 <Alloy>
-	<Window id="bookForm" backgroundColor="white">
-		<View class="container">
-			<Button class="button" top="60dp">Aqui va el formulario</Button>
+	<Window id="bookForm">
+		<View id="movableView" backgroundColor="white">
+			<View class="container">
+				<TextField id="desde" enabled="false" onClick="searchLoc"/><View id="pickUp" onClick="searchLoc"/>
+				<TextField id="hasta" enabled="false" onClick="searchLoc"/><View id="dropOff" onClick="searchLoc" />
+				<TextField id="when" enabled="false"/>
+				<TextField id="howMany" />
+			</View>
 		</View>
 	</Window>
 </Alloy>

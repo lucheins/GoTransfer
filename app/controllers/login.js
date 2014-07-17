@@ -102,8 +102,12 @@ function openWindowsLoginSuccess()
 	    // view: 'Events'
 	// };        	
     // var win = Alloy.createController('start', args).getView();
+    if (Ti.App.Properties.getString('loginFrom') == 'index'){
+    	var win = Alloy.createController('bookForm').getView();
+    } else {
+    	var win = Alloy.createController('index').getView();
+    }
     
-    var win = Alloy.createController('bookForm').getView();
     win.open();
 	$.login.close();
 	$.login = null;	  

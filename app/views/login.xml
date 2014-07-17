@@ -1,13 +1,15 @@
 <Alloy>
-	<Window id="login" backgroundColor="white">	
-		<ActivityIndicator id="activity"/>
-		<View id="container">
-		 	<TextField id="username" />
-		 	<TextField id="password" />
-	        <View id="buttonLogin">	
-					<Label id="textBottom">Login</Label>
-			</View>	
-			<!-- <LoginButton id="fbButton" ns="Alloy.Globals.Facebook"/> -->
+	<Window id="login" backgroundColor="black">
+		<View id="movableView" backgroundColor="white">	
+			<ActivityIndicator id="activity"/>
+			<View id="container">
+			 	<TextField id="username" />
+			 	<TextField id="password" />
+		        <View id="buttonLogin">	
+						<Label id="textBottom">Login</Label>
+				</View>	
+				<!-- <LoginButton id="fbButton" ns="Alloy.Globals.Facebook"/> -->
+			</View>
 		</View>
 	</Window>
 </Alloy>
