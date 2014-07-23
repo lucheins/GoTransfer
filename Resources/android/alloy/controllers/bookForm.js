@@ -120,7 +120,10 @@ function Controller() {
     $.__views.__alloyId0.add($.__views.howMany);
     exports.destroy = function() {};
     _.extend($, $.__views);
+<<<<<<< HEAD
+=======
     var args = arguments[0] || {};
+>>>>>>> 9420786db9401752cec60a0adcc656663c5eef7f
     var index = Alloy.createController("index").getView();
     $.bookForm.addEventListener("open", function() {
         var activity = $.bookForm.activity;

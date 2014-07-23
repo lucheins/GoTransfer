@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">v3Ie0A40CwNdFlKv3AWCPnpdcSE2QINU</property>
+    <property name="acs-oauth-key-production" type="string">wwGAT4nupxY01HOZf6HD2RTtMm0PLGsm</property>
+    <property name="acs-api-key-production" type="string">bYW17pZHAZuCtxQIbV029ZsB69xKKYV1</property>
+    <property name="acs-oauth-secret-development" type="string">xv1AN55AXKhoNBDSGnpnQIo6jrfyU09z</property>
+    <property name="acs-oauth-key-development" type="string">OZfmIOLbN3J5NZqMWCOdOtatwA06uXwY</property>
+    <property name="acs-api-key-development" type="string">toCXr43h0J7qJmfLThG76RRJuZZmsHWE</property>
     <id>com.gotransfer.com</id>
     <name>GoTransfer</name>
     <version>1.0</version>
@@ -13,6 +19,40 @@
     <analytics>true</analytics>
     <guid>d101f611-d200-4d80-b6e2-282f17ab3fb5</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
+<<<<<<< HEAD
+    <ios>
+        <plist>
+            <dict>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UISupportedInterfaceOrientations~ipad</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+            </dict>
+        </plist>
+    </ios>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <tool-api-level>14</tool-api-level>
+        <manifest>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+            <!-- other manifest entries -->
+        </manifest>
+    </android>
+=======
     <iphone>
 	    <orientations device="iphone">
 	        <orientation>Ti.UI.PORTRAIT</orientation>
@@ -34,6 +74,7 @@
 		</manifest> 
 		
 	</android> 
+>>>>>>> 9420786db9401752cec60a0adcc656663c5eef7f
     <mobileweb>
         <precache/>
         <splash>
@@ -43,17 +84,17 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-	    <!-- Add the appropriate line(s) to your modules section -->
-	    <module platform="android">facebook</module>
-	    <module platform="iphone">facebook</module>
-	</modules>
-	<property name="ti.facebook.appid">238640849675744</property>
+        <module platform="commonjs">ti.cloud</module>
+        <module platform="android">facebook</module>
+        <module platform="iphone">facebook</module>
+    </modules>
+    <property name="ti.facebook.appid">238640849675744</property>
     <deployment-targets>
         <target device="android">true</target>
         <target device="blackberry">false</target>
         <target device="ipad">true</target>
         <target device="iphone">true</target>
-        <target device="mobileweb">true</target>
+        <target device="mobileweb">false</target>
         <target device="tizen">false</target>
     </deployment-targets>
     <sdk-version>3.2.3.GA</sdk-version>

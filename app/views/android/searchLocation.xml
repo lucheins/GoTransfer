@@ -20,11 +20,11 @@
 		</Tab>
 		<Tab title="Direccion">
 			<Window id="address" onClick="row">
-				<TableView>
-					<TableViewRow title="Casa"/>
-					<TableViewRow title="Trabajo"/>
-					<TableViewRow title="Suegros"/>
-				</TableView>
+					<TextField id="mainSt" />
+					<TextField id="stNumber"/>
+					<TextField id="secondSt" />
+					<TextField id="Reference"/>
+					<Switch id="basicSwitch" value="true" onChange="outputState"/>
 			</Window>
 		</Tab>
 	</TabGroup>
