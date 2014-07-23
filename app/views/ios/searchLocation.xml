@@ -25,7 +25,11 @@
 					</TableView>
 				</View>
 				<View id="address">
-					<Label>Address</Label>
+					<TextField id="mainSt" />
+					<TextField id="stNumber"/>
+					<TextField id="secondSt" />
+					<TextField id="Reference"/>
+					<Switch id="basicSwitch" value="true" onChange="outputState"/>
 				</View>
 			</ScrollableView>
 		</View>
