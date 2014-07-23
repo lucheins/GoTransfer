@@ -116,31 +116,51 @@ function Controller() {
     $.__views.buttonRegister.add($.__views.textBottom);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.username.addEventListener("blur", function() {
-        var client = Ti.Network.createHTTPClient();
-        var url = Alloy.Globals.DOMAIN + Alloy.Globals.URL_REGISTER;
-        client.open("POST", url);
-        client.onload = function() {
-            var json = this.responseText;
-            var response = JSON.parse(json);
-            "NICKEXISTS" == response.result && alert("Nickname ocupado. Escoja otro nickname!");
-        };
-        var params = {
-            tc: Alloy.Globals.USER_MOBILE.toString(),
-            username: $.username.value
-        };
-        client.send(params);
+    $.register.addEventListener("open", function() {
+        var activity = $.register.activity;
+        if (Ti.Platform.Android && Alloy.Globals.Android.Api >= 11) {
+            activity.actionBar.title = "Registro";
+            activity.actionBar.displayHomeAsUp = true;
+            activity.actionBar.onHomeIconItemSelected = function() {
+                $.register.close();
+                $.register = null;
+            };
+        }
+        Ti.App.Properties.setString("loginFrom", "register");
     });
+    var campovacio;
+    var login = Alloy.createController("login").getView();
     $.buttonRegister.addEventListener("click", function() {
-        if ("" == $.pass1.value) alert("Por favor, introduzca su clave de usuario"); else {
+        campovacio = "" == $.name.value ? "Por favor, introduzca su nombre" : "" == $.username.value ? "Por favor, introduzca su nickname" : "" == $.pass1.value ? "Por favor, introduzca su clave de usuario" : "" == $.email.value ? "Por favor, introduzca su e-mail" : "";
+        if (campovacio) {
+            $.activity.hide();
+            alert(campovacio);
+        } else {
             var client = Ti.Network.createHTTPClient();
             var url = Alloy.Globals.DOMAIN + Alloy.Globals.URL_REGISTER;
             client.open("POST", url);
-            client.ondatastream = function() {};
+            client.ondatastream = function() {
+                $.activity.show();
+            };
             client.onload = function() {
                 var json = this.responseText;
                 var response = JSON.parse(json);
-                "OK" == response.result ? alert("Registrado!") : "NICKEXISTS" == response.result ? alert("Nickname ocupado. Escoja otro nickname!") : alert(response);
+                if ("OK" == response.result) {
+                    $.activity.hide();
+                    alert("Tu cuenta ha sido activada con exito. Ya puedes ingresar con tu usuario y cuenta creados!");
+                    $.register.close();
+                    $.register = null;
+                    login.open();
+                } else if ("NICKEXISTS" == response.result) {
+                    $.activity.hide();
+                    alert("Nickname ocupado por otro usuario. Por favor escoje otro nickname!");
+                } else if ("EMAILEXISTS" == response.result) {
+                    $.activity.hide();
+                    alert("La direccion de e-mail ya esta registrada en el sistema. Por favor intenta con otro e-mail!");
+                } else if ("INVALIDEMAIL" == response.result) {
+                    $.activity.hide();
+                    alert("Por favor intenta con un e-mail valido!");
+                }
             };
             client.onerror = function(e) {
                 alert("Transmission error: " + e.error);

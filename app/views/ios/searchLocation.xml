@@ -13,6 +13,7 @@
 					<TableView filterAttribute="title">
 					<!-- <SearchBar backgroundColor="white" hintText="Busqueda rapida" onFocus="clear" id="searchPlace" onBlur="fill" color="black"/> -->
 					<TableViewSection headerTitle="Aeropuertos">
+						
 						<TableViewRow title="UIO - Quito Mariscal Sucre "/>
 						<TableViewRow title="GYE - Guayaquil Simon Bolivar"/>
 						<TableViewRow title="CUE - Cuenca"/>

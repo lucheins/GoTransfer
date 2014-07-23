@@ -1,4 +1,10 @@
 function Controller() {
+    function clear() {
+        $.searchPlace.hintText = "";
+    }
+    function fill() {
+        $.searchPlace.hintText = "Busqueda rapida";
+    }
     function row(e) {
         var arg = {
             title: e.rowData.title,
@@ -59,6 +65,14 @@ function Controller() {
         id: "air"
     });
     __alloyId27.push($.__views.air);
+    $.__views.searchPlace = Ti.UI.createSearchBar({
+        backgroundColor: "white",
+        hintText: "Busqueda rapida",
+        id: "searchPlace",
+        color: "black"
+    });
+    clear ? $.__views.searchPlace.addEventListener("focus", clear) : __defers["$.__views.searchPlace!focus!clear"] = true;
+    fill ? $.__views.searchPlace.addEventListener("blur", fill) : __defers["$.__views.searchPlace!blur!fill"] = true;
     var __alloyId34 = [];
     $.__views.__alloyId35 = Ti.UI.createTableViewSection({
         headerTitle: "Aeropuertos",
@@ -82,6 +96,7 @@ function Controller() {
     $.__views.__alloyId35.add($.__views.__alloyId38);
     $.__views.__alloyId33 = Ti.UI.createTableView({
         data: __alloyId34,
+        search: $.__views.searchPlace,
         filterAttribute: "title",
         id: "__alloyId33"
     });
@@ -116,6 +131,8 @@ function Controller() {
         }
     });
     __defers["$.__views.pickPlace!click!row"] && $.__views.pickPlace.addEventListener("click", row);
+    __defers["$.__views.searchPlace!focus!clear"] && $.__views.searchPlace.addEventListener("focus", clear);
+    __defers["$.__views.searchPlace!blur!fill"] && $.__views.searchPlace.addEventListener("blur", fill);
     _.extend($, exports);
 }
 
