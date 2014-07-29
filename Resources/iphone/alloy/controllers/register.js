@@ -1,9 +1,20 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "register";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     $.__views.register = Ti.UI.createWindow({
@@ -29,8 +40,6 @@ function Controller() {
     $.__views.movableView.add($.__views.registerForm);
     $.__views.name = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Nombre",
         top: "2%",
@@ -45,8 +54,6 @@ function Controller() {
     $.__views.registerForm.add($.__views.name);
     $.__views.username = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Nickname",
         top: "14%",
@@ -56,14 +63,11 @@ function Controller() {
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "username",
-        autocapitalization: "false"
+        id: "username"
     });
     $.__views.registerForm.add($.__views.username);
     $.__views.pass1 = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Password",
         passwordMask: "true",
@@ -79,8 +83,6 @@ function Controller() {
     $.__views.registerForm.add($.__views.pass1);
     $.__views.email = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "E-mail",
         top: "38%",
@@ -90,8 +92,7 @@ function Controller() {
         border: 1,
         borderColor: "#c1c1c1",
         paddingLeft: 5,
-        id: "email",
-        autocapitalization: "false"
+        id: "email"
     });
     $.__views.registerForm.add($.__views.email);
     $.__views.buttonRegister = Ti.UI.createView({

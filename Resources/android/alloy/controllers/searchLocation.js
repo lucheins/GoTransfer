@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function row(e) {
         var arg = {
@@ -10,108 +19,109 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "searchLocation";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
-    var __alloyId34 = [];
+    var __alloyId15 = [];
     $.__views.starred = Ti.UI.createWindow({
         id: "starred"
     });
     row ? $.__views.starred.addEventListener("click", row) : __defers["$.__views.starred!click!row"] = true;
-    var __alloyId37 = [];
-    $.__views.__alloyId38 = Ti.UI.createTableViewRow({
+    var __alloyId18 = [];
+    $.__views.__alloyId19 = Ti.UI.createTableViewRow({
         title: "Casa",
-        id: "__alloyId38"
+        id: "__alloyId19"
     });
-    __alloyId37.push($.__views.__alloyId38);
-    $.__views.__alloyId39 = Ti.UI.createTableViewRow({
+    __alloyId18.push($.__views.__alloyId19);
+    $.__views.__alloyId20 = Ti.UI.createTableViewRow({
         title: "Trabajo",
-        id: "__alloyId39"
+        id: "__alloyId20"
     });
-    __alloyId37.push($.__views.__alloyId39);
-    $.__views.__alloyId40 = Ti.UI.createTableViewRow({
+    __alloyId18.push($.__views.__alloyId20);
+    $.__views.__alloyId21 = Ti.UI.createTableViewRow({
         title: "Suegros",
-        id: "__alloyId40"
+        id: "__alloyId21"
     });
-    __alloyId37.push($.__views.__alloyId40);
-    $.__views.__alloyId36 = Ti.UI.createTableView({
-        data: __alloyId37,
-        id: "__alloyId36"
+    __alloyId18.push($.__views.__alloyId21);
+    $.__views.__alloyId17 = Ti.UI.createTableView({
+        data: __alloyId18,
+        id: "__alloyId17"
     });
-    $.__views.starred.add($.__views.__alloyId36);
-    $.__views.__alloyId35 = Ti.UI.createTab({
+    $.__views.starred.add($.__views.__alloyId17);
+    $.__views.__alloyId16 = Ti.UI.createTab({
         window: $.__views.starred,
         title: "Mis Favoritos",
-        id: "__alloyId35"
+        id: "__alloyId16"
     });
-    __alloyId34.push($.__views.__alloyId35);
+    __alloyId15.push($.__views.__alloyId16);
     $.__views.air = Ti.UI.createWindow({
         id: "air"
     });
     row ? $.__views.air.addEventListener("click", row) : __defers["$.__views.air!click!row"] = true;
-    var __alloyId43 = [];
-    $.__views.__alloyId44 = Ti.UI.createTableViewRow({
+    var __alloyId24 = [];
+    $.__views.__alloyId25 = Ti.UI.createTableViewRow({
         title: "UIO - Quito Mariscal Sucre ",
-        id: "__alloyId44"
+        id: "__alloyId25"
     });
-    __alloyId43.push($.__views.__alloyId44);
-    $.__views.__alloyId45 = Ti.UI.createTableViewRow({
+    __alloyId24.push($.__views.__alloyId25);
+    $.__views.__alloyId26 = Ti.UI.createTableViewRow({
         title: "GYE - Guayaquil Simon Bolivar",
-        id: "__alloyId45"
+        id: "__alloyId26"
     });
-    __alloyId43.push($.__views.__alloyId45);
-    $.__views.__alloyId46 = Ti.UI.createTableViewRow({
+    __alloyId24.push($.__views.__alloyId26);
+    $.__views.__alloyId27 = Ti.UI.createTableViewRow({
         title: "CUE - Cuenca",
-        id: "__alloyId46"
+        id: "__alloyId27"
     });
-    __alloyId43.push($.__views.__alloyId46);
-    $.__views.__alloyId42 = Ti.UI.createTableView({
-        data: __alloyId43,
-        id: "__alloyId42"
+    __alloyId24.push($.__views.__alloyId27);
+    $.__views.__alloyId23 = Ti.UI.createTableView({
+        data: __alloyId24,
+        id: "__alloyId23"
     });
-    $.__views.air.add($.__views.__alloyId42);
-    $.__views.__alloyId41 = Ti.UI.createTab({
+    $.__views.air.add($.__views.__alloyId23);
+    $.__views.__alloyId22 = Ti.UI.createTab({
         window: $.__views.air,
         title: "Aeropuertos",
-        id: "__alloyId41"
+        id: "__alloyId22"
     });
-    __alloyId34.push($.__views.__alloyId41);
+    __alloyId15.push($.__views.__alloyId22);
     $.__views.address = Ti.UI.createWindow({
         id: "address"
     });
-    row ? $.__views.address.addEventListener("click", row) : __defers["$.__views.address!click!row"] = true;
-    var __alloyId49 = [];
-    $.__views.__alloyId50 = Ti.UI.createTableViewRow({
-        title: "Casa",
-        id: "__alloyId50"
+    $.__views.mainSt = Ti.UI.createTextField({
+        id: "mainSt"
     });
-    __alloyId49.push($.__views.__alloyId50);
-    $.__views.__alloyId51 = Ti.UI.createTableViewRow({
-        title: "Trabajo",
-        id: "__alloyId51"
+    $.__views.address.add($.__views.mainSt);
+    $.__views.stNumber = Ti.UI.createTextField({
+        id: "stNumber"
     });
-    __alloyId49.push($.__views.__alloyId51);
-    $.__views.__alloyId52 = Ti.UI.createTableViewRow({
-        title: "Suegros",
-        id: "__alloyId52"
+    $.__views.address.add($.__views.stNumber);
+    $.__views.secondSt = Ti.UI.createTextField({
+        id: "secondSt"
     });
-    __alloyId49.push($.__views.__alloyId52);
-    $.__views.__alloyId48 = Ti.UI.createTableView({
-        data: __alloyId49,
-        id: "__alloyId48"
+    $.__views.address.add($.__views.secondSt);
+    $.__views.Reference = Ti.UI.createTextField({
+        id: "Reference"
     });
-    $.__views.address.add($.__views.__alloyId48);
-    $.__views.__alloyId47 = Ti.UI.createTab({
+    $.__views.address.add($.__views.Reference);
+    $.__views.basicSwitch = Ti.UI.createSwitch({
+        value: true,
+        id: "basicSwitch"
+    });
+    $.__views.address.add($.__views.basicSwitch);
+    $.__views.__alloyId28 = Ti.UI.createTab({
         window: $.__views.address,
         title: "Direccion",
-        id: "__alloyId47"
+        id: "__alloyId28"
     });
-    __alloyId34.push($.__views.__alloyId47);
+    __alloyId15.push($.__views.__alloyId28);
     $.__views.pickPlace = Ti.UI.createTabGroup({
-        tabs: __alloyId34,
+        tabs: __alloyId15,
         id: "pickPlace"
     });
     $.__views.pickPlace && $.addTopLevelView($.__views.pickPlace);
@@ -132,7 +142,6 @@ function Controller() {
     });
     __defers["$.__views.starred!click!row"] && $.__views.starred.addEventListener("click", row);
     __defers["$.__views.air!click!row"] && $.__views.air.addEventListener("click", row);
-    __defers["$.__views.address!click!row"] && $.__views.address.addEventListener("click", row);
     _.extend($, exports);
 }
 

@@ -1,10 +1,13 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
-    function clear() {
-        $.searchPlace.hintText = "";
-    }
-    function fill() {
-        $.searchPlace.hintText = "Busqueda rapida";
-    }
     function row(e) {
         var arg = {
             title: e.rowData.title,
@@ -16,9 +19,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "searchLocation";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -35,83 +40,91 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.pickPlace.add($.__views.movableView);
-    var __alloyId27 = [];
+    var __alloyId15 = [];
     $.__views.starred = Ti.UI.createView({
         id: "starred"
     });
-    __alloyId27.push($.__views.starred);
-    var __alloyId29 = [];
-    $.__views.__alloyId30 = Ti.UI.createTableViewRow({
+    __alloyId15.push($.__views.starred);
+    var __alloyId17 = [];
+    $.__views.__alloyId18 = Ti.UI.createTableViewRow({
         title: "Casa",
-        id: "__alloyId30"
+        id: "__alloyId18"
     });
-    __alloyId29.push($.__views.__alloyId30);
-    $.__views.__alloyId31 = Ti.UI.createTableViewRow({
+    __alloyId17.push($.__views.__alloyId18);
+    $.__views.__alloyId19 = Ti.UI.createTableViewRow({
         title: "Trabajo",
-        id: "__alloyId31"
+        id: "__alloyId19"
     });
-    __alloyId29.push($.__views.__alloyId31);
-    $.__views.__alloyId32 = Ti.UI.createTableViewRow({
+    __alloyId17.push($.__views.__alloyId19);
+    $.__views.__alloyId20 = Ti.UI.createTableViewRow({
         title: "Suegros",
-        id: "__alloyId32"
+        id: "__alloyId20"
     });
-    __alloyId29.push($.__views.__alloyId32);
-    $.__views.__alloyId28 = Ti.UI.createTableView({
-        data: __alloyId29,
-        id: "__alloyId28"
+    __alloyId17.push($.__views.__alloyId20);
+    $.__views.__alloyId16 = Ti.UI.createTableView({
+        data: __alloyId17,
+        id: "__alloyId16"
     });
-    $.__views.starred.add($.__views.__alloyId28);
+    $.__views.starred.add($.__views.__alloyId16);
     $.__views.air = Ti.UI.createView({
         id: "air"
     });
-    __alloyId27.push($.__views.air);
-    $.__views.searchPlace = Ti.UI.createSearchBar({
-        backgroundColor: "white",
-        hintText: "Busqueda rapida",
-        id: "searchPlace",
-        color: "black"
-    });
-    clear ? $.__views.searchPlace.addEventListener("focus", clear) : __defers["$.__views.searchPlace!focus!clear"] = true;
-    fill ? $.__views.searchPlace.addEventListener("blur", fill) : __defers["$.__views.searchPlace!blur!fill"] = true;
-    var __alloyId34 = [];
-    $.__views.__alloyId35 = Ti.UI.createTableViewSection({
+    __alloyId15.push($.__views.air);
+    var __alloyId22 = [];
+    $.__views.__alloyId23 = Ti.UI.createTableViewSection({
         headerTitle: "Aeropuertos",
-        id: "__alloyId35"
+        id: "__alloyId23"
     });
-    __alloyId34.push($.__views.__alloyId35);
-    $.__views.__alloyId36 = Ti.UI.createTableViewRow({
+    __alloyId22.push($.__views.__alloyId23);
+    $.__views.__alloyId24 = Ti.UI.createTableViewRow({
         title: "UIO - Quito Mariscal Sucre ",
-        id: "__alloyId36"
+        id: "__alloyId24"
     });
-    $.__views.__alloyId35.add($.__views.__alloyId36);
-    $.__views.__alloyId37 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId23.add($.__views.__alloyId24);
+    $.__views.__alloyId25 = Ti.UI.createTableViewRow({
         title: "GYE - Guayaquil Simon Bolivar",
-        id: "__alloyId37"
+        id: "__alloyId25"
     });
-    $.__views.__alloyId35.add($.__views.__alloyId37);
-    $.__views.__alloyId38 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId23.add($.__views.__alloyId25);
+    $.__views.__alloyId26 = Ti.UI.createTableViewRow({
         title: "CUE - Cuenca",
-        id: "__alloyId38"
+        id: "__alloyId26"
     });
-    $.__views.__alloyId35.add($.__views.__alloyId38);
-    $.__views.__alloyId33 = Ti.UI.createTableView({
-        data: __alloyId34,
-        search: $.__views.searchPlace,
+    $.__views.__alloyId23.add($.__views.__alloyId26);
+    $.__views.__alloyId21 = Ti.UI.createTableView({
+        data: __alloyId22,
         filterAttribute: "title",
-        id: "__alloyId33"
+        id: "__alloyId21"
     });
-    $.__views.air.add($.__views.__alloyId33);
+    $.__views.air.add($.__views.__alloyId21);
     $.__views.address = Ti.UI.createView({
         id: "address"
     });
-    __alloyId27.push($.__views.address);
-    $.__views.__alloyId39 = Ti.UI.createLabel({
-        text: "Address",
-        id: "__alloyId39"
+    __alloyId15.push($.__views.address);
+    $.__views.mainSt = Ti.UI.createTextField({
+        id: "mainSt"
     });
-    $.__views.address.add($.__views.__alloyId39);
+    $.__views.address.add($.__views.mainSt);
+    $.__views.stNumber = Ti.UI.createTextField({
+        id: "stNumber"
+    });
+    $.__views.address.add($.__views.stNumber);
+    $.__views.secondSt = Ti.UI.createTextField({
+        id: "secondSt"
+    });
+    $.__views.address.add($.__views.secondSt);
+    $.__views.Reference = Ti.UI.createTextField({
+        id: "Reference"
+    });
+    $.__views.address.add($.__views.Reference);
+    $.__views.basicSwitch = Ti.UI.createSwitch({
+        value: true,
+        id: "basicSwitch"
+    });
+    $.__views.address.add($.__views.basicSwitch);
+    outputState ? $.__views.basicSwitch.addEventListener("change", outputState) : __defers["$.__views.basicSwitch!change!outputState"] = true;
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId27,
+        views: __alloyId15,
         id: "scrollableView"
     });
     $.__views.movableView.add($.__views.scrollableView);
@@ -131,8 +144,7 @@ function Controller() {
         }
     });
     __defers["$.__views.pickPlace!click!row"] && $.__views.pickPlace.addEventListener("click", row);
-    __defers["$.__views.searchPlace!focus!clear"] && $.__views.searchPlace.addEventListener("focus", clear);
-    __defers["$.__views.searchPlace!blur!fill"] && $.__views.searchPlace.addEventListener("blur", fill);
+    __defers["$.__views.basicSwitch!change!outputState"] && $.__views.basicSwitch.addEventListener("change", outputState);
     _.extend($, exports);
 }
 

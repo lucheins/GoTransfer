@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function checkdata(value) {
         var testresults = false;
@@ -13,9 +22,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "login";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     $.__views.login = Ti.UI.createWindow({
@@ -41,8 +52,6 @@ function Controller() {
     $.__views.movableView.add($.__views.container);
     $.__views.username = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Username",
         top: "2%",
@@ -57,8 +66,6 @@ function Controller() {
     $.__views.container.add($.__views.username);
     $.__views.password = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Password",
         passwordMask: "true",

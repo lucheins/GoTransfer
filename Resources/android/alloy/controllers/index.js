@@ -1,15 +1,18 @@
-function Controller() {
-    function toggle() {
-        if (!touchRightStarted && !touchLeftStarted) {
-            buttonPressed = true;
-            toggleLeftSlider();
-        }
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
     }
+    return arg;
+}
+
+function Controller() {
     function next() {
-        if (0 == Ti.App.Properties.getString("user_id")) {
+        if (0 != Ti.App.Properties.getString("user_id") && Ti.App.Properties.getString("user_id") && null != Ti.App.Properties.getString("user_id")) Alloy.createController("bookForm").getView().open(); else {
             Alloy.createController("portal").getView().open();
             Ti.App.Properties.setString("loginFrom", "index");
-        } else Alloy.createController("bookForm").getView().open();
+        }
     }
     function endTouch() {
         buttonPressed && (buttonPressed = false);
@@ -51,6 +54,16 @@ function Controller() {
             });
         }
     }
+    function setmenuLogger() {
+        if (0 == Ti.App.Properties.getString("user_id") || !Ti.App.Properties.getString("user_id") || null == Ti.App.Properties.getString("user_id")) {
+            $.menuLogger.title = "Iniciar Sesion";
+            $.menuLogger.addEventListener("click", toggleLogin);
+        }
+        if (Ti.App.Properties.getString("user_id") > 0) {
+            $.menuLogger.title = "Cerrar Sesion";
+            $.menuLogger.addEventListener("click", toggleLogout);
+        }
+    }
     function toggleLeftSlider() {
         if (hasSlided) {
             direction = "reset";
@@ -62,14 +75,7 @@ function Controller() {
             direction = "right";
             $.movableView.animate(animateRight);
             hasSlided = true;
-            if (0 == Ti.App.Properties.getString("user_id")) {
-                $.menuLogger.title = "Iniciar Sesion";
-                $.menuLogger.addEventListener("click", toggleLogin);
-            }
-            if (Ti.App.Properties.getString("user_id") > 0) {
-                $.menuLogger.title = "Cerrar Sesion";
-                $.menuLogger.addEventListener("click", toggleLogout);
-            }
+            setmenuLogger();
         }
         Ti.App.fireEvent("sliderToggled", {
             hasSlided: hasSlided,
@@ -78,9 +84,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -117,24 +125,19 @@ function Controller() {
     });
     $.__views.containerview.add($.__views.leftMenu);
     var __alloyId1 = [];
-    $.__views.__alloyId2 = Ti.UI.createTableViewSection({
-        rowCount: "1",
-        id: "__alloyId2"
-    });
-    __alloyId1.push($.__views.__alloyId2);
-    $.__views.__alloyId3 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId2 = Ti.UI.createTableViewRow({
         title: "Cuenta",
         height: "24",
         indentionLevel: "0",
-        id: "__alloyId3"
+        id: "__alloyId2"
     });
-    $.__views.__alloyId2.add($.__views.__alloyId3);
+    __alloyId1.push($.__views.__alloyId2);
     $.__views.menuLogger = Ti.UI.createTableViewRow({
         height: "46",
         indentionLevel: "1",
         id: "menuLogger"
     });
-    $.__views.__alloyId2.add($.__views.menuLogger);
+    __alloyId1.push($.__views.menuLogger);
     $.__views.tableMenu = Ti.UI.createTableView({
         data: __alloyId1,
         id: "tableMenu",
@@ -151,13 +154,13 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.containerview.add($.__views.movableView);
-    $.__views.__alloyId4 = Ti.UI.createButton({
+    $.__views.__alloyId3 = Ti.UI.createButton({
         title: "Pedir Transfer",
         top: "60dp",
-        id: "__alloyId4"
+        id: "__alloyId3"
     });
-    $.__views.movableView.add($.__views.__alloyId4);
-    next ? $.__views.__alloyId4.addEventListener("click", next) : __defers["$.__views.__alloyId4!click!next"] = true;
+    $.__views.movableView.add($.__views.__alloyId3);
+    next ? $.__views.__alloyId3.addEventListener("click", next) : __defers["$.__views.__alloyId3!click!next"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.index.addEventListener("android:back", function() {
@@ -219,8 +222,7 @@ function Controller() {
         Ti.App.Properties.setString("user_id", "0");
         alert("Sesion cerrada con exito!");
     };
-    __defers["$.__views.leftButton!click!toggle"] && $.__views.leftButton.addEventListener("click", toggle);
-    __defers["$.__views.__alloyId4!click!next"] && $.__views.__alloyId4.addEventListener("click", next);
+    __defers["$.__views.__alloyId3!click!next"] && $.__views.__alloyId3.addEventListener("click", next);
     _.extend($, exports);
 }
 

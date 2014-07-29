@@ -1,25 +1,34 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
-    function __alloyId33() {
-        $.__views.movableView.removeEventListener("open", __alloyId33);
+    function __alloyId14() {
+        $.__views.movableView.removeEventListener("open", __alloyId14);
         if ($.__views.movableView.activity) $.__views.movableView.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId28 = {
+            var __alloyId9 = {
                 title: "All",
-                id: "__alloyId27"
+                id: "__alloyId8"
             };
-            $.__views.__alloyId27 = e.menu.add(_.pick(__alloyId28, Alloy.Android.menuItemCreateArgs));
-            $.__views.__alloyId27.applyProperties(_.omit(__alloyId28, Alloy.Android.menuItemCreateArgs));
-            var __alloyId30 = {
+            $.__views.__alloyId8 = e.menu.add(_.pick(__alloyId9, Alloy.Android.menuItemCreateArgs));
+            $.__views.__alloyId8.applyProperties(_.omit(__alloyId9, Alloy.Android.menuItemCreateArgs));
+            var __alloyId11 = {
                 title: "Active",
-                id: "__alloyId29"
+                id: "__alloyId10"
             };
-            $.__views.__alloyId29 = e.menu.add(_.pick(__alloyId30, Alloy.Android.menuItemCreateArgs));
-            $.__views.__alloyId29.applyProperties(_.omit(__alloyId30, Alloy.Android.menuItemCreateArgs));
-            var __alloyId32 = {
+            $.__views.__alloyId10 = e.menu.add(_.pick(__alloyId11, Alloy.Android.menuItemCreateArgs));
+            $.__views.__alloyId10.applyProperties(_.omit(__alloyId11, Alloy.Android.menuItemCreateArgs));
+            var __alloyId13 = {
                 title: "Done",
-                id: "__alloyId31"
+                id: "__alloyId12"
             };
-            $.__views.__alloyId31 = e.menu.add(_.pick(__alloyId32, Alloy.Android.menuItemCreateArgs));
-            $.__views.__alloyId31.applyProperties(_.omit(__alloyId32, Alloy.Android.menuItemCreateArgs));
+            $.__views.__alloyId12 = e.menu.add(_.pick(__alloyId13, Alloy.Android.menuItemCreateArgs));
+            $.__views.__alloyId12.applyProperties(_.omit(__alloyId13, Alloy.Android.menuItemCreateArgs));
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
@@ -31,9 +40,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "start";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -50,14 +61,14 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.startWin.add($.__views.movableView);
-    $.__views.__alloyId17 = Ti.UI.createButton({
+    $.__views.__alloyId6 = Ti.UI.createButton({
         title: "Cancel",
         top: "30dp",
-        id: "__alloyId17"
+        id: "__alloyId6"
     });
-    $.__views.movableView.add($.__views.__alloyId17);
-    closeWindow ? $.__views.__alloyId17.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId17!click!closeWindow"] = true;
-    $.__views.movableView.addEventListener("open", __alloyId33);
+    $.__views.movableView.add($.__views.__alloyId6);
+    closeWindow ? $.__views.__alloyId6.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId6!click!closeWindow"] = true;
+    $.__views.movableView.addEventListener("open", __alloyId14);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var facebook = Alloy.Globals.Facebook;
@@ -77,7 +88,7 @@ function Controller() {
             };
         }
     });
-    __defers["$.__views.__alloyId17!click!closeWindow"] && $.__views.__alloyId17.addEventListener("click", closeWindow);
+    __defers["$.__views.__alloyId6!click!closeWindow"] && $.__views.__alloyId6.addEventListener("click", closeWindow);
     _.extend($, exports);
 }
 
