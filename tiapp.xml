@@ -19,7 +19,7 @@
     <analytics>true</analytics>
     <guid>d101f611-d200-4d80-b6e2-282f17ab3fb5</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
-<<<<<<< HEAD
+
     <ios>
         <plist>
             <dict>
@@ -52,7 +52,7 @@
             <!-- other manifest entries -->
         </manifest>
     </android>
-=======
+
     <iphone>
 	    <orientations device="iphone">
 	        <orientation>Ti.UI.PORTRAIT</orientation>
@@ -74,7 +74,7 @@
 		</manifest> 
 		
 	</android> 
->>>>>>> 9420786db9401752cec60a0adcc656663c5eef7f
+
     <mobileweb>
         <precache/>
         <splash>
