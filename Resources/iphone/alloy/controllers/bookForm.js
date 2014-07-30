@@ -155,6 +155,21 @@ function Controller() {
         $.bookForm = null;
         index.open();
     });
+    var getLocation = function(e) {
+        if (!e.success || e.error) return;
+        var longitude = e.coords.longitude;
+        var latitude = e.coords.latitude;
+        Titanium.Geolocation.reverseGeocoder(latitude, longitude, function(evt) {
+            if (evt.success) {
+                var places = evt.places;
+                if (places && places.length) {
+                    var place = places[0].address;
+                    alert("Current location " + place);
+                } else alert("No address found");
+            }
+        });
+    };
+    Ti.Geolocation.addEventListener("location", getLocation);
     __defers["$.__views.desde!click!searchLoc"] && $.__views.desde.addEventListener("click", searchLoc);
     __defers["$.__views.pickUp!click!searchLoc"] && $.__views.pickUp.addEventListener("click", searchLoc);
     __defers["$.__views.hasta!click!searchLoc"] && $.__views.hasta.addEventListener("click", searchLoc);
