@@ -17,7 +17,6 @@ $.index.addEventListener('android:back', function(e) {
   });
 
 $.index.addEventListener('open', function(e) {
-
 var activity = $.index.activity;
 if (Ti.Platform.Android){ 
 if( Alloy.Globals.Android.Api >= 11 ) {
@@ -47,7 +46,7 @@ function toggle() {
 
 
 function next() {
-    if(Ti.App.Properties.getString('user_id') == 0){
+    if(Ti.App.Properties.getString('user_id') == 0 || !Ti.App.Properties.getString('user_id') || Ti.App.Properties.getString('user_id') == null){
 	Alloy.createController("portal").getView().open();
 	Ti.App.Properties.setString('loginFrom', 'index');
 	} else { 
@@ -167,8 +166,6 @@ $.movableView.addEventListener('touchmove', moveTouch);
 $.leftMenu.addEventListener('touchmove', moveTouch);
 
 
-
-
 var toggleLogin = function() {
 	$.menuLogger.removeEventListener('click', toggleLogin);
 	Ti.App.Properties.setString('loginFrom', 'leftmenu');
@@ -179,16 +176,8 @@ var toggleLogout = function() {
 	Ti.App.Properties.setString('user_id', '0');
 	alert('Sesion cerrada con exito!');
 };
-
-function toggleLeftSlider () {
-	if (!hasSlided) {
-		direction = "right";
-		if (Titanium.Platform.osname == "iOS") {
-			$.leftButton.touchEnabled = true;	
-		}
-		$.movableView.animate(animateRight);
-		hasSlided = true;
-		if (Ti.App.Properties.getString('user_id') == 0){
+function setmenuLogger () {
+	if (Ti.App.Properties.getString('user_id') == 0 || !Ti.App.Properties.getString('user_id') || Ti.App.Properties.getString('user_id') == null){
 	    	$.menuLogger.title = 'Iniciar Sesion';
 	    	$.menuLogger.addEventListener('click', toggleLogin);
 	    } 
@@ -196,6 +185,18 @@ function toggleLeftSlider () {
 	    	$.menuLogger.title = 'Cerrar Sesion';
 	    	$.menuLogger.addEventListener('click', toggleLogout);
 	   	}
+}
+
+function toggleLeftSlider () {
+	
+	if (!hasSlided) {
+		direction = "right";
+		if (Titanium.Platform.osname == "iOS") {
+			$.leftButton.touchEnabled = true;	
+		}
+		$.movableView.animate(animateRight);
+		hasSlided = true;
+		setmenuLogger ();
 	} else {
 		direction = "reset";
 		if (Titanium.Platform.osname == "iOS") {

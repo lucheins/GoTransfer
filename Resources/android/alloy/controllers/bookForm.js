@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function searchLoc(e) {
         var arg = {
@@ -7,9 +16,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "bookForm";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -31,8 +42,6 @@ function Controller() {
     $.__views.movableView.add($.__views.__alloyId0);
     $.__views.desde = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Desde",
         top: "5%",
@@ -59,8 +68,6 @@ function Controller() {
     searchLoc ? $.__views.pickUp.addEventListener("click", searchLoc) : __defers["$.__views.pickUp!click!searchLoc"] = true;
     $.__views.hasta = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Hasta",
         top: "20%",
@@ -87,8 +94,6 @@ function Controller() {
     searchLoc ? $.__views.dropOff.addEventListener("click", searchLoc) : __defers["$.__views.dropOff!click!searchLoc"] = true;
     $.__views.when = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Hoy",
         top: "35%",
@@ -104,8 +109,6 @@ function Controller() {
     $.__views.__alloyId0.add($.__views.when);
     $.__views.howMany = Ti.UI.createTextField({
         borderStyle: "Ti.UI.INPUT_BORDERSTYLE_ROUNDED",
-        keyboardType: "Titanium.UI.KEYBOARD_DEFAULT",
-        returnKeyType: "Titanium.UI.RETURNKEY_DEFAULT",
         color: "#336699",
         hintText: "Pasajeros",
         top: "50%",
@@ -120,10 +123,7 @@ function Controller() {
     $.__views.__alloyId0.add($.__views.howMany);
     exports.destroy = function() {};
     _.extend($, $.__views);
-<<<<<<< HEAD
-=======
     var args = arguments[0] || {};
->>>>>>> 9420786db9401752cec60a0adcc656663c5eef7f
     var index = Alloy.createController("index").getView();
     $.bookForm.addEventListener("open", function() {
         var activity = $.bookForm.activity;
