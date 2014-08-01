@@ -19,12 +19,12 @@
 			</Window>
 		</Tab>
 		<Tab title="Direccion">
-			<Window id="address">
+			<Window id="address" onFocus="getLocation">
 					<TextField id="mainSt" />
 					<TextField id="stNumber"/>
 					<TextField id="secondSt" />
 					<TextField id="Reference"/>
-					<Switch id="basicSwitch" value="true"/>
+					<!-- <Switch id="basicSwitch" value="true"/> -->
 			</Window>
 		</Tab>
 	</TabGroup>

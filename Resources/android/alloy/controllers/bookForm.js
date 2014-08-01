@@ -14,29 +14,6 @@ function Controller() {
         };
         Alloy.createController("searchLocation", arg).getView().open();
     }
-    function NavRules() {
-        Ti.Geolocation.headingFilter = 10;
-        Ti.Geolocation.Android.manualMode = true;
-        var gpsProvider = Ti.Geolocation.Android.createLocationProvider({
-            name: Ti.Geolocation.PROVIDER_GPS,
-            minUpdateDistance: 0,
-            minUpdateTime: 0
-        });
-        Ti.Geolocation.Android.addLocationProvider(gpsProvider);
-        var networkProvider = Ti.Geolocation.Android.createLocationProvider({
-            name: Ti.Geolocation.PROVIDER_NETWORK,
-            minUpdateTime: 3,
-            minUpdateDistance: 30
-        });
-        Ti.Geolocation.Android.addLocationProvider(networkProvider);
-        var gpsRule = Ti.Geolocation.Android.createLocationRule({
-            provider: Ti.Geolocation.PROVIDER_GPS,
-            accuracy: 10,
-            maxAge: 5e3,
-            minAge: 3e3
-        });
-        Ti.Geolocation.Android.addLocationRule(gpsRule);
-    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "bookForm";
     if (arguments[0]) {
@@ -178,32 +155,6 @@ function Controller() {
         $.bookForm = null;
         index.open();
     });
-    Ti.UI.createAlertDialog({
-        title: "GPS Limitada",
-        message: "Activa el GPS para poder utilizar el servicio de mapas",
-        ok: "OK"
-    });
-    Ti.UI.createAlertDialog({
-        title: "Buscando GPS",
-        message: "Utiliza la app en tu auto o sal a un espacio abierto",
-        ok: "OK"
-    });
-    NavRules();
-    var getLocation = function(e) {
-        if (!e.success || e.error) return;
-        var longitude = e.coords.longitude;
-        var latitude = e.coords.latitude;
-        Titanium.Geolocation.reverseGeocoder(latitude, longitude, function(evt) {
-            if (evt.success) {
-                var places = evt.places;
-                if (places && places.length) {
-                    var place = places[0].address;
-                    alert("Current location " + place);
-                } else alert("No address found");
-            }
-        });
-    };
-    Ti.Geolocation.addEventListener("location", getLocation);
     __defers["$.__views.desde!click!searchLoc"] && $.__views.desde.addEventListener("click", searchLoc);
     __defers["$.__views.pickUp!click!searchLoc"] && $.__views.pickUp.addEventListener("click", searchLoc);
     __defers["$.__views.hasta!click!searchLoc"] && $.__views.hasta.addEventListener("click", searchLoc);

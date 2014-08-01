@@ -17,6 +17,18 @@ function Controller() {
         $.pickPlace.close();
         desde.open();
     }
+    function getLocation() {
+        true == Ti.Geolocation.locationServicesEnabled ? Titanium.Geolocation.addEventListener("location", function(e) {
+            if (!e.success || e.error) alert("currentPosition error"); else {
+                longitude = e.coords.longitude;
+                latitude = e.coords.latitude;
+                Titanium.Yahoo.yql('select * from yahoo.maps.findLocation where q="' + latitude + "," + longitude + '" and gflags="R"', function(e) {
+                    var woeid = e.data.ResultSet.Results.woeid;
+                    Titanium.API.info(woeid);
+                });
+            }
+        }) : alert("location services not enabled");
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "searchLocation";
     if (arguments[0]) {
@@ -32,6 +44,7 @@ function Controller() {
     });
     $.__views.pickPlace && $.addTopLevelView($.__views.pickPlace);
     row ? $.__views.pickPlace.addEventListener("click", row) : __defers["$.__views.pickPlace!click!row"] = true;
+    getLocation ? $.__views.pickPlace.addEventListener("open", getLocation) : __defers["$.__views.pickPlace!open!getLocation"] = true;
     $.__views.movableView = Ti.UI.createView({
         top: 40,
         zIndex: 100,
@@ -102,6 +115,8 @@ function Controller() {
     });
     __alloyId15.push($.__views.address);
     $.__views.mainSt = Ti.UI.createTextField({
+        top: 20,
+        width: "100%",
         id: "mainSt"
     });
     $.__views.address.add($.__views.mainSt);
@@ -117,12 +132,6 @@ function Controller() {
         id: "Reference"
     });
     $.__views.address.add($.__views.Reference);
-    $.__views.basicSwitch = Ti.UI.createSwitch({
-        value: true,
-        id: "basicSwitch"
-    });
-    $.__views.address.add($.__views.basicSwitch);
-    outputState ? $.__views.basicSwitch.addEventListener("change", outputState) : __defers["$.__views.basicSwitch!change!outputState"] = true;
     $.__views.scrollableView = Ti.UI.createScrollableView({
         views: __alloyId15,
         id: "scrollableView"
@@ -143,8 +152,10 @@ function Controller() {
             };
         }
     });
+    var longitude;
+    var latitude;
     __defers["$.__views.pickPlace!click!row"] && $.__views.pickPlace.addEventListener("click", row);
-    __defers["$.__views.basicSwitch!change!outputState"] && $.__views.basicSwitch.addEventListener("change", outputState);
+    __defers["$.__views.pickPlace!open!getLocation"] && $.__views.pickPlace.addEventListener("open", getLocation);
     _.extend($, exports);
 }
 

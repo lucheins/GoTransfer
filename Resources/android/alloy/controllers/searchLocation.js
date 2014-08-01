@@ -17,6 +17,18 @@ function Controller() {
         $.pickPlace.close();
         desde.open();
     }
+    function getLocation() {
+        true == Ti.Geolocation.locationServicesEnabled ? Titanium.Geolocation.addEventListener("location", function(e) {
+            if (!e.success || e.error) alert("currentPosition error"); else {
+                longitude = e.coords.longitude;
+                latitude = e.coords.latitude;
+                Titanium.Yahoo.yql('select * from yahoo.maps.findLocation where q="' + latitude + "," + longitude + '" and gflags="R"', function(e) {
+                    var woeid = JSON.parse(e.data);
+                    Titanium.API.info(woeid);
+                });
+            }
+        }) : alert("location services not enabled");
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "searchLocation";
     if (arguments[0]) {
@@ -93,7 +105,10 @@ function Controller() {
     $.__views.address = Ti.UI.createWindow({
         id: "address"
     });
+    getLocation ? $.__views.address.addEventListener("focus", getLocation) : __defers["$.__views.address!focus!getLocation"] = true;
     $.__views.mainSt = Ti.UI.createTextField({
+        top: 20,
+        width: "100%",
         id: "mainSt"
     });
     $.__views.address.add($.__views.mainSt);
@@ -109,11 +124,6 @@ function Controller() {
         id: "Reference"
     });
     $.__views.address.add($.__views.Reference);
-    $.__views.basicSwitch = Ti.UI.createSwitch({
-        value: true,
-        id: "basicSwitch"
-    });
-    $.__views.address.add($.__views.basicSwitch);
     $.__views.__alloyId28 = Ti.UI.createTab({
         window: $.__views.address,
         title: "Direccion",
@@ -140,8 +150,11 @@ function Controller() {
             };
         }
     });
+    var longitude;
+    var latitude;
     __defers["$.__views.starred!click!row"] && $.__views.starred.addEventListener("click", row);
     __defers["$.__views.air!click!row"] && $.__views.air.addEventListener("click", row);
+    __defers["$.__views.address!focus!getLocation"] && $.__views.address.addEventListener("focus", getLocation);
     _.extend($, exports);
 }
 

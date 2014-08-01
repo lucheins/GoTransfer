@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="pickPlace" onClick="row">
+	<Window id="pickPlace" onClick="row" onOpen="getLocation">
 		<View id="movableView" backgroundColor="white">
 			<ScrollableView id="scrollableView">
 				<View id="starred">
@@ -30,7 +30,7 @@
 					<TextField id="stNumber"/>
 					<TextField id="secondSt" />
 					<TextField id="Reference"/>
-					<Switch id="basicSwitch" value="true" onChange="outputState"/>
+					<!-- <Switch id="basicSwitch" value="true" onChange="outputState"/> -->
 				</View>
 			</ScrollableView>
 		</View>

@@ -34,3 +34,37 @@ function row(e){
     desde.open();
 };
 
+var longitude;
+var latitude;
+// // demonstrates manual mode:
+// var providerGps = Ti.Geolocation.Android.createLocationProvider({
+    // name: Ti.Geolocation.PROVIDER_GPS,
+    // minUpdateDistance: 0.0,
+    // minUpdateTime: 0
+// });
+// Ti.Geolocation.Android.addLocationProvider(providerGps);
+// Ti.Geolocation.Android.manualMode = true;
+
+
+
+function getLocation() {
+	if(Ti.Geolocation.locationServicesEnabled == true) {
+		Titanium.Geolocation.addEventListener('location', function(e){
+		if (!e.success || e.error)
+    {
+        alert("currentPosition error");
+    } else {
+    	longitude = e.coords.longitude;
+    	latitude = e.coords.latitude;
+    	
+    	Titanium.Yahoo.yql('select * from yahoo.maps.findLocation where q="'+latitude+','+longitude+'" and gflags="R"',function(e) {
+		var woeid = JSON.parse(e.data);
+		Titanium.API.info(woeid);
+		});
+    		}//end else
+		});	
+		}//end if locationservices	
+		else {
+			alert('location services not enabled');
+		}
+	} //END getLocation		
