@@ -58,7 +58,7 @@ function getLocation() {
     	latitude = e.coords.latitude;
     	
     	Titanium.Yahoo.yql('select * from yahoo.maps.findLocation where q="'+latitude+','+longitude+'" and gflags="R"',function(e) {
-		var woeid = JSON.parse(e.data);
+		var woeid = e.data.ResultSet.Results.woeid;
 		Titanium.API.info(woeid);
 		});
     		}//end else
