@@ -17,17 +17,52 @@ function Controller() {
         $.pickPlace.close();
         desde.open();
     }
+    function gpsWait() {
+        setTimeout(function() {
+            $.gps.hide();
+        }, 5e3);
+    }
+    function gpsDone() {
+        clearTimeout(gpsloading);
+        $.gps.hide();
+    }
+    function removeLocation() {
+        Titanium.Geolocation.removeEventListener("location", getLocation);
+        Ti.API.info("locationservices stopped");
+    }
+    function fillLocation() {
+        Titanium.Geolocation.addEventListener("location", getLocation);
+        $.gps.show();
+        gpsWait();
+    }
     function getLocation() {
-        true == Ti.Geolocation.locationServicesEnabled ? Titanium.Geolocation.addEventListener("location", function(e) {
+        Titanium.Geolocation.getCurrentPosition(function(e) {
             if (!e.success || e.error) alert("currentPosition error"); else {
                 longitude = e.coords.longitude;
                 latitude = e.coords.latitude;
-                Titanium.Yahoo.yql('select * from yahoo.maps.findLocation where q="' + latitude + "," + longitude + '" and gflags="R"', function(e) {
-                    var woeid = e.data.ResultSet.Results.woeid;
-                    Titanium.API.info(woeid);
+                if (e.success) {
+                    Ti.API.info("locationservices started");
+                    removeLocation();
+                }
+                Titanium.Platform.Android ? Titanium.Yahoo.yql('select * from yahoo.maps.findLocation where q="' + latitude + "," + longitude + '" and gflags="R"', function(e) {
+                    e.data.json.ResultSet.Results.Found && gpsDone();
+                    var casa = e.data.json.ResultSet.Results.house;
+                    var calle = e.data.json.ResultSet.Results.street;
+                    var radius = e.data.json.ResultSet.Results.radius;
+                    var quality = e.data.json.ResultSet.Results.quality;
+                    alert("Te encuentras en: " + calle + " #" + casa + " La calidad del satelite de tu GPS es de: " + quality + " Margen de error de tu GPS: " + radius + " metros");
+                }) : Titanium.Geolocation.reverseGeocoder(latitude, longitude, function(evt) {
+                    if (evt.success) {
+                        var places = evt.places;
+                        if (places && places.length) {
+                            gpsDone();
+                            var place = places[0].address;
+                            alert("Current location " + place);
+                        } else alert("No address found");
+                    }
                 });
             }
-        }) : alert("location services not enabled");
+        });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "searchLocation";
@@ -44,7 +79,8 @@ function Controller() {
     });
     $.__views.pickPlace && $.addTopLevelView($.__views.pickPlace);
     row ? $.__views.pickPlace.addEventListener("click", row) : __defers["$.__views.pickPlace!click!row"] = true;
-    getLocation ? $.__views.pickPlace.addEventListener("open", getLocation) : __defers["$.__views.pickPlace!open!getLocation"] = true;
+    fillLocation ? $.__views.pickPlace.addEventListener("open", fillLocation) : __defers["$.__views.pickPlace!open!fillLocation"] = true;
+    removeLocation ? $.__views.pickPlace.addEventListener("close", removeLocation) : __defers["$.__views.pickPlace!close!removeLocation"] = true;
     $.__views.movableView = Ti.UI.createView({
         top: 40,
         zIndex: 100,
@@ -54,6 +90,36 @@ function Controller() {
     });
     $.__views.pickPlace.add($.__views.movableView);
     var __alloyId15 = [];
+    $.__views.address = Ti.UI.createView({
+        id: "address"
+    });
+    __alloyId15.push($.__views.address);
+    $.__views.gps = Ti.UI.createActivityIndicator({
+        top: 40,
+        width: "100%",
+        height: 40,
+        id: "gps",
+        message: "Loading..."
+    });
+    $.__views.address.add($.__views.gps);
+    $.__views.mainSt = Ti.UI.createTextField({
+        top: 20,
+        width: "100%",
+        id: "mainSt"
+    });
+    $.__views.address.add($.__views.mainSt);
+    $.__views.stNumber = Ti.UI.createTextField({
+        id: "stNumber"
+    });
+    $.__views.address.add($.__views.stNumber);
+    $.__views.secondSt = Ti.UI.createTextField({
+        id: "secondSt"
+    });
+    $.__views.address.add($.__views.secondSt);
+    $.__views.Reference = Ti.UI.createTextField({
+        id: "Reference"
+    });
+    $.__views.address.add($.__views.Reference);
     $.__views.starred = Ti.UI.createView({
         id: "starred"
     });
@@ -110,28 +176,6 @@ function Controller() {
         id: "__alloyId21"
     });
     $.__views.air.add($.__views.__alloyId21);
-    $.__views.address = Ti.UI.createView({
-        id: "address"
-    });
-    __alloyId15.push($.__views.address);
-    $.__views.mainSt = Ti.UI.createTextField({
-        top: 20,
-        width: "100%",
-        id: "mainSt"
-    });
-    $.__views.address.add($.__views.mainSt);
-    $.__views.stNumber = Ti.UI.createTextField({
-        id: "stNumber"
-    });
-    $.__views.address.add($.__views.stNumber);
-    $.__views.secondSt = Ti.UI.createTextField({
-        id: "secondSt"
-    });
-    $.__views.address.add($.__views.secondSt);
-    $.__views.Reference = Ti.UI.createTextField({
-        id: "Reference"
-    });
-    $.__views.address.add($.__views.Reference);
     $.__views.scrollableView = Ti.UI.createScrollableView({
         views: __alloyId15,
         id: "scrollableView"
@@ -154,8 +198,10 @@ function Controller() {
     });
     var longitude;
     var latitude;
+    var gpsloading;
     __defers["$.__views.pickPlace!click!row"] && $.__views.pickPlace.addEventListener("click", row);
-    __defers["$.__views.pickPlace!open!getLocation"] && $.__views.pickPlace.addEventListener("open", getLocation);
+    __defers["$.__views.pickPlace!open!fillLocation"] && $.__views.pickPlace.addEventListener("open", fillLocation);
+    __defers["$.__views.pickPlace!close!removeLocation"] && $.__views.pickPlace.addEventListener("close", removeLocation);
     _.extend($, exports);
 }
 

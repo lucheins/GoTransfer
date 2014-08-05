@@ -1,7 +1,15 @@
 <Alloy>
-	<Window id="pickPlace" onClick="row" onOpen="getLocation">
+	<Window id="pickPlace" onClick="row" onOpen="fillLocation" onClose="removeLocation">
 		<View id="movableView" backgroundColor="white">
 			<ScrollableView id="scrollableView">
+				<View id="address">
+					<ActivityIndicator id="gps" message="Loading..."/>
+					<TextField id="mainSt" />
+					<TextField id="stNumber"/>
+					<TextField id="secondSt" />
+					<TextField id="Reference"/>
+					<!-- <Switch id="basicSwitch" value="true" onChange="outputState"/> -->
+				</View>
 				<View id="starred">
 					<TableView>
 						<TableViewRow title="Casa"/>
@@ -25,13 +33,7 @@
 					</TableViewSection> -->
 					</TableView>
 				</View>
-				<View id="address">
-					<TextField id="mainSt" />
-					<TextField id="stNumber"/>
-					<TextField id="secondSt" />
-					<TextField id="Reference"/>
-					<!-- <Switch id="basicSwitch" value="true" onChange="outputState"/> -->
-				</View>
+				
 			</ScrollableView>
 		</View>
 	</Window>		
