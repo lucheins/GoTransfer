@@ -17,20 +17,19 @@ $.index.addEventListener('android:back', function(e) {
   });
 
 $.index.addEventListener('open', function(e) {
-var activity = $.index.activity;
-if (Ti.Platform.Android){ 
-if( Alloy.Globals.Android.Api >= 11 ) {
-        activity.actionBar.title = "GoTransfer";
-        activity.actionBar.displayHomeAsUp = false;
-        activity.actionBar.onHomeIconItemSelected = function() {
-			if (!touchRightStarted && !touchLeftStarted) {
-				buttonPressed = true;
-				toggleLeftSlider();
-			}
-		}; 
-	}
-};
-
+	var activity = $.index.activity;
+	if (Ti.Platform.Android){ 
+	if( Alloy.Globals.Android.Api >= 11 ) {
+	        activity.actionBar.title = "GoTransfer";
+	        activity.actionBar.displayHomeAsUp = false;
+	        activity.actionBar.onHomeIconItemSelected = function() {
+				if (!touchRightStarted && !touchLeftStarted) {
+					buttonPressed = true;
+					toggleLeftSlider();
+				}
+			}; 
+		}
+	};
 });
 
 $.index.open();
