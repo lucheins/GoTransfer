@@ -45,7 +45,6 @@ function Controller() {
                     removeLocation();
                 }
                 Titanium.Platform.Android ? Titanium.Yahoo.yql('select * from yahoo.maps.findLocation where q="' + latitude + "," + longitude + '" and gflags="R"', function(e) {
-                    e.data.json.ResultSet.Results.Found && gpsDone();
                     var casa = e.data.json.ResultSet.Results.house;
                     var calle = e.data.json.ResultSet.Results.street;
                     var radius = e.data.json.ResultSet.Results.radius;
@@ -67,9 +66,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "searchLocation";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};

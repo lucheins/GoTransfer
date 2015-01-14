@@ -16,7 +16,7 @@ if( OS_ANDROID ) {
         "Api" : Ti.Platform.Android.API_LEVEL
     };
 }
-Alloy.Globals.DOMAIN = 'http://www.luca-mobile.com/mundial/';
+Alloy.Globals.DOMAIN = 'http://www.taxi-puerto.com/';
 Alloy.Globals.URL_LOGIN = 'index.php?option=com_mobile&task=startSessionUser';
 Alloy.Globals.URL_REGISTER = 'index.php?option=com_mobile&task=register';
 Alloy.Globals.USER = 'GoTraLucaMk1981';

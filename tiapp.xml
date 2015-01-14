@@ -6,13 +6,13 @@
     <property name="acs-oauth-secret-development" type="string">xv1AN55AXKhoNBDSGnpnQIo6jrfyU09z</property>
     <property name="acs-oauth-key-development" type="string">OZfmIOLbN3J5NZqMWCOdOtatwA06uXwY</property>
     <property name="acs-api-key-development" type="string">toCXr43h0J7qJmfLThG76RRJuZZmsHWE</property>
-    <id>com.gotransferapp.com</id>
-    <name>GoTransfer</name>
+    <id>com.taxipuertoapp.com</id>
+    <name>TaxiPuerto</name>
     <version>1.0</version>
-    <publisher>lucheins</publisher>
-    <url>http://</url>
-    <description>not specified</description>
-    <copyright>2014 by lucheins</copyright>
+    <publisher>Luca Marketing</publisher>
+    <url>http://taxi-puerto.com</url>
+    <description>La manera facil de ir al aeropuerto!</description>
+    <copyright>2015 by Luca Marketing</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
@@ -22,6 +22,10 @@
     <ios>
         <plist>
             <dict>
+            	<key>NSLocationAlwaysUsageDescription</key>
+                <string>
+                    Get reverse directions to allow user to access our taxi service.
+                </string>
                 <key>UISupportedInterfaceOrientations~iphone</key>
                 <array>
                     <string>UIInterfaceOrientationPortrait</string>
@@ -45,9 +49,8 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>14</tool-api-level>
         <manifest>
-            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
             <!-- other manifest entries -->
         </manifest>
     </android>
@@ -62,9 +65,9 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>14</tool-api-level>
+        <tool-api-level>21</tool-api-level>
         <manifest>
-            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
             <!-- other manifest entries -->
             <application>
                 <activity
@@ -94,7 +97,7 @@
         <target device="mobileweb">false</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>3.3.0.GA</sdk-version>
+    <sdk-version>3.5.0.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

@@ -1,4 +1,4 @@
- mvar args = arguments[0] || {};
+var args = arguments[0] || {};
 var from = args.clicked || '';
 $.pickPlace.addEventListener('open', function(e) {
 	var activity = $.pickPlace.activity;
