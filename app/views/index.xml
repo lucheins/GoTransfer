@@ -13,7 +13,8 @@
 						</TableView>
 		</View>
 		<View id="movableView" backgroundColor="white">
-        	<Button class="button" onClick="next" top="60dp">Pedir Transfer</Button>
+        	<Button class="button" onClick="now" top="60dp">Estoy listo ahora!</Button>
+        	<Button class="button" onClick="later" top="60dp">Necesito un taxi para mas tarde</Button>
         </View>
          </View>
     </Window>

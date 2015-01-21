@@ -40,33 +40,33 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.startWin.add($.__views.movableView);
-    $.__views.__alloyId6 = Ti.UI.createButton({
+    $.__views.__alloyId7 = Ti.UI.createButton({
         title: "Cancel",
         top: "30dp",
-        id: "__alloyId6"
+        id: "__alloyId7"
     });
-    $.__views.movableView.add($.__views.__alloyId6);
-    closeWindow ? $.__views.__alloyId6.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId6!click!closeWindow"] = true;
+    $.__views.movableView.add($.__views.__alloyId7);
+    closeWindow ? $.__views.__alloyId7.addEventListener("click", closeWindow) : __defers["$.__views.__alloyId7!click!closeWindow"] = true;
     $.__views.footer = Ti.UI.createView({
         id: "footer",
         height: "40dp"
     });
     $.__views.movableView.add($.__views.footer);
-    var __alloyId8 = [];
-    var __alloyId12 = {
+    var __alloyId9 = [];
+    var __alloyId13 = {
         title: "All"
     };
-    __alloyId8.push(__alloyId12);
-    var __alloyId13 = {
+    __alloyId9.push(__alloyId13);
+    var __alloyId14 = {
         title: "Active"
     };
-    __alloyId8.push(__alloyId13);
-    var __alloyId14 = {
+    __alloyId9.push(__alloyId14);
+    var __alloyId15 = {
         title: "Done"
     };
-    __alloyId8.push(__alloyId14);
+    __alloyId9.push(__alloyId15);
     $.__views.tabbedbar = Ti.UI.iOS.createTabbedBar({
-        labels: __alloyId8,
+        labels: __alloyId9,
         id: "tabbedbar"
     });
     $.__views.footer.add($.__views.tabbedbar);
@@ -89,7 +89,7 @@ function Controller() {
             };
         }
     });
-    __defers["$.__views.__alloyId6!click!closeWindow"] && $.__views.__alloyId6.addEventListener("click", closeWindow);
+    __defers["$.__views.__alloyId7!click!closeWindow"] && $.__views.__alloyId7.addEventListener("click", closeWindow);
     _.extend($, exports);
 }
 

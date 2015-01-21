@@ -44,7 +44,7 @@ function toggle() {
 
 
 
-function next() {
+function account() {
     if(Ti.App.Properties.getString('user_id') == 0 || !Ti.App.Properties.getString('user_id') || Ti.App.Properties.getString('user_id') == null){
 	Alloy.createController("portal").getView().open();
 	Ti.App.Properties.setString('loginFrom', 'index');
@@ -52,6 +52,9 @@ function next() {
     Alloy.createController("bookForm").getView().open();
   	};
 };
+function desde() {
+	Alloy.createController("desde").getView().open();
+}
 //LOGIN LOGOUT FUNCTIONS
 
 

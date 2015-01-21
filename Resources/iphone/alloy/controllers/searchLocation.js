@@ -94,11 +94,11 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.pickPlace.add($.__views.movableView);
-    var __alloyId15 = [];
+    var __alloyId16 = [];
     $.__views.address = Ti.UI.createView({
         id: "address"
     });
-    __alloyId15.push($.__views.address);
+    __alloyId16.push($.__views.address);
     $.__views.gps = Ti.UI.createActivityIndicator({
         top: 40,
         width: "100%",
@@ -128,61 +128,61 @@ function Controller() {
     $.__views.starred = Ti.UI.createView({
         id: "starred"
     });
-    __alloyId15.push($.__views.starred);
-    var __alloyId17 = [];
-    $.__views.__alloyId18 = Ti.UI.createTableViewRow({
-        title: "Casa",
-        id: "__alloyId18"
-    });
-    __alloyId17.push($.__views.__alloyId18);
+    __alloyId16.push($.__views.starred);
+    var __alloyId18 = [];
     $.__views.__alloyId19 = Ti.UI.createTableViewRow({
-        title: "Trabajo",
+        title: "Casa",
         id: "__alloyId19"
     });
-    __alloyId17.push($.__views.__alloyId19);
+    __alloyId18.push($.__views.__alloyId19);
     $.__views.__alloyId20 = Ti.UI.createTableViewRow({
-        title: "Suegros",
+        title: "Trabajo",
         id: "__alloyId20"
     });
-    __alloyId17.push($.__views.__alloyId20);
-    $.__views.__alloyId16 = Ti.UI.createTableView({
-        data: __alloyId17,
-        id: "__alloyId16"
+    __alloyId18.push($.__views.__alloyId20);
+    $.__views.__alloyId21 = Ti.UI.createTableViewRow({
+        title: "Suegros",
+        id: "__alloyId21"
     });
-    $.__views.starred.add($.__views.__alloyId16);
+    __alloyId18.push($.__views.__alloyId21);
+    $.__views.__alloyId17 = Ti.UI.createTableView({
+        data: __alloyId18,
+        id: "__alloyId17"
+    });
+    $.__views.starred.add($.__views.__alloyId17);
     $.__views.air = Ti.UI.createView({
         id: "air"
     });
-    __alloyId15.push($.__views.air);
-    var __alloyId22 = [];
-    $.__views.__alloyId23 = Ti.UI.createTableViewSection({
+    __alloyId16.push($.__views.air);
+    var __alloyId23 = [];
+    $.__views.__alloyId24 = Ti.UI.createTableViewSection({
         headerTitle: "Aeropuertos",
-        id: "__alloyId23"
-    });
-    __alloyId22.push($.__views.__alloyId23);
-    $.__views.__alloyId24 = Ti.UI.createTableViewRow({
-        title: "UIO - Quito Mariscal Sucre ",
         id: "__alloyId24"
     });
-    $.__views.__alloyId23.add($.__views.__alloyId24);
+    __alloyId23.push($.__views.__alloyId24);
     $.__views.__alloyId25 = Ti.UI.createTableViewRow({
-        title: "GYE - Guayaquil Simon Bolivar",
+        title: "UIO - Quito Mariscal Sucre ",
         id: "__alloyId25"
     });
-    $.__views.__alloyId23.add($.__views.__alloyId25);
+    $.__views.__alloyId24.add($.__views.__alloyId25);
     $.__views.__alloyId26 = Ti.UI.createTableViewRow({
-        title: "CUE - Cuenca",
+        title: "GYE - Guayaquil Simon Bolivar",
         id: "__alloyId26"
     });
-    $.__views.__alloyId23.add($.__views.__alloyId26);
-    $.__views.__alloyId21 = Ti.UI.createTableView({
-        data: __alloyId22,
-        filterAttribute: "title",
-        id: "__alloyId21"
+    $.__views.__alloyId24.add($.__views.__alloyId26);
+    $.__views.__alloyId27 = Ti.UI.createTableViewRow({
+        title: "CUE - Cuenca",
+        id: "__alloyId27"
     });
-    $.__views.air.add($.__views.__alloyId21);
+    $.__views.__alloyId24.add($.__views.__alloyId27);
+    $.__views.__alloyId22 = Ti.UI.createTableView({
+        data: __alloyId23,
+        filterAttribute: "title",
+        id: "__alloyId22"
+    });
+    $.__views.air.add($.__views.__alloyId22);
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId15,
+        views: __alloyId16,
         id: "scrollableView"
     });
     $.__views.movableView.add($.__views.scrollableView);

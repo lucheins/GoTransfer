@@ -14,7 +14,13 @@ function Controller() {
             toggleLeftSlider();
         }
     }
-    function next() {
+    function now() {
+        if (0 != Ti.App.Properties.getString("user_id") && Ti.App.Properties.getString("user_id") && null != Ti.App.Properties.getString("user_id")) Alloy.createController("bookForm").getView().open(); else {
+            Alloy.createController("portal").getView().open();
+            Ti.App.Properties.setString("loginFrom", "index");
+        }
+    }
+    function later() {
         if (0 != Ti.App.Properties.getString("user_id") && Ti.App.Properties.getString("user_id") && null != Ti.App.Properties.getString("user_id")) Alloy.createController("bookForm").getView().open(); else {
             Alloy.createController("portal").getView().open();
             Ti.App.Properties.setString("loginFrom", "index");
@@ -178,12 +184,19 @@ function Controller() {
     });
     $.__views.containerview.add($.__views.movableView);
     $.__views.__alloyId3 = Ti.UI.createButton({
-        title: "Pedir Transfer",
+        title: "Estoy listo ahora!",
         top: "60dp",
         id: "__alloyId3"
     });
     $.__views.movableView.add($.__views.__alloyId3);
-    next ? $.__views.__alloyId3.addEventListener("click", next) : __defers["$.__views.__alloyId3!click!next"] = true;
+    now ? $.__views.__alloyId3.addEventListener("click", now) : __defers["$.__views.__alloyId3!click!now"] = true;
+    $.__views.__alloyId4 = Ti.UI.createButton({
+        title: "Necesito un taxi para mas tarde",
+        top: "60dp",
+        id: "__alloyId4"
+    });
+    $.__views.movableView.add($.__views.__alloyId4);
+    later ? $.__views.__alloyId4.addEventListener("click", later) : __defers["$.__views.__alloyId4!click!later"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.index.addEventListener("android:back", function() {
@@ -246,7 +259,8 @@ function Controller() {
         alert("Sesion cerrada con exito!");
     };
     __defers["$.__views.leftButton!click!toggle"] && $.__views.leftButton.addEventListener("click", toggle);
-    __defers["$.__views.__alloyId3!click!next"] && $.__views.__alloyId3.addEventListener("click", next);
+    __defers["$.__views.__alloyId3!click!now"] && $.__views.__alloyId3.addEventListener("click", now);
+    __defers["$.__views.__alloyId4!click!later"] && $.__views.__alloyId4.addEventListener("click", later);
     _.extend($, exports);
 }
 
