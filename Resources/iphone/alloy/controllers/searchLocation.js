@@ -94,11 +94,11 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.pickPlace.add($.__views.movableView);
-    var __alloyId16 = [];
+    var __alloyId19 = [];
     $.__views.address = Ti.UI.createView({
         id: "address"
     });
-    __alloyId16.push($.__views.address);
+    __alloyId19.push($.__views.address);
     $.__views.gps = Ti.UI.createActivityIndicator({
         top: 40,
         width: "100%",
@@ -128,61 +128,61 @@ function Controller() {
     $.__views.starred = Ti.UI.createView({
         id: "starred"
     });
-    __alloyId16.push($.__views.starred);
-    var __alloyId18 = [];
-    $.__views.__alloyId19 = Ti.UI.createTableViewRow({
+    __alloyId19.push($.__views.starred);
+    var __alloyId21 = [];
+    $.__views.__alloyId22 = Ti.UI.createTableViewRow({
         title: "Casa",
-        id: "__alloyId19"
+        id: "__alloyId22"
     });
-    __alloyId18.push($.__views.__alloyId19);
-    $.__views.__alloyId20 = Ti.UI.createTableViewRow({
+    __alloyId21.push($.__views.__alloyId22);
+    $.__views.__alloyId23 = Ti.UI.createTableViewRow({
         title: "Trabajo",
+        id: "__alloyId23"
+    });
+    __alloyId21.push($.__views.__alloyId23);
+    $.__views.__alloyId24 = Ti.UI.createTableViewRow({
+        title: "Suegros",
+        id: "__alloyId24"
+    });
+    __alloyId21.push($.__views.__alloyId24);
+    $.__views.__alloyId20 = Ti.UI.createTableView({
+        data: __alloyId21,
         id: "__alloyId20"
     });
-    __alloyId18.push($.__views.__alloyId20);
-    $.__views.__alloyId21 = Ti.UI.createTableViewRow({
-        title: "Suegros",
-        id: "__alloyId21"
-    });
-    __alloyId18.push($.__views.__alloyId21);
-    $.__views.__alloyId17 = Ti.UI.createTableView({
-        data: __alloyId18,
-        id: "__alloyId17"
-    });
-    $.__views.starred.add($.__views.__alloyId17);
+    $.__views.starred.add($.__views.__alloyId20);
     $.__views.air = Ti.UI.createView({
         id: "air"
     });
-    __alloyId16.push($.__views.air);
-    var __alloyId23 = [];
-    $.__views.__alloyId24 = Ti.UI.createTableViewSection({
+    __alloyId19.push($.__views.air);
+    var __alloyId26 = [];
+    $.__views.__alloyId27 = Ti.UI.createTableViewSection({
         headerTitle: "Aeropuertos",
-        id: "__alloyId24"
-    });
-    __alloyId23.push($.__views.__alloyId24);
-    $.__views.__alloyId25 = Ti.UI.createTableViewRow({
-        title: "UIO - Quito Mariscal Sucre ",
-        id: "__alloyId25"
-    });
-    $.__views.__alloyId24.add($.__views.__alloyId25);
-    $.__views.__alloyId26 = Ti.UI.createTableViewRow({
-        title: "GYE - Guayaquil Simon Bolivar",
-        id: "__alloyId26"
-    });
-    $.__views.__alloyId24.add($.__views.__alloyId26);
-    $.__views.__alloyId27 = Ti.UI.createTableViewRow({
-        title: "CUE - Cuenca",
         id: "__alloyId27"
     });
-    $.__views.__alloyId24.add($.__views.__alloyId27);
-    $.__views.__alloyId22 = Ti.UI.createTableView({
-        data: __alloyId23,
-        filterAttribute: "title",
-        id: "__alloyId22"
+    __alloyId26.push($.__views.__alloyId27);
+    $.__views.__alloyId28 = Ti.UI.createTableViewRow({
+        title: "UIO - Quito Mariscal Sucre ",
+        id: "__alloyId28"
     });
-    $.__views.air.add($.__views.__alloyId22);
+    $.__views.__alloyId27.add($.__views.__alloyId28);
+    $.__views.__alloyId29 = Ti.UI.createTableViewRow({
+        title: "GYE - Guayaquil Simon Bolivar",
+        id: "__alloyId29"
+    });
+    $.__views.__alloyId27.add($.__views.__alloyId29);
+    $.__views.__alloyId30 = Ti.UI.createTableViewRow({
+        title: "CUE - Cuenca",
+        id: "__alloyId30"
+    });
+    $.__views.__alloyId27.add($.__views.__alloyId30);
+    $.__views.__alloyId25 = Ti.UI.createTableView({
+        data: __alloyId26,
+        filterAttribute: "title",
+        id: "__alloyId25"
+    });
+    $.__views.air.add($.__views.__alloyId25);
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId16,
+        views: __alloyId19,
         id: "scrollableView"
     });
     $.__views.movableView.add($.__views.scrollableView);

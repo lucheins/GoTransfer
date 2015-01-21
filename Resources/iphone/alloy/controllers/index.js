@@ -15,16 +15,12 @@ function Controller() {
         }
     }
     function now() {
-        if (0 != Ti.App.Properties.getString("user_id") && Ti.App.Properties.getString("user_id") && null != Ti.App.Properties.getString("user_id")) Alloy.createController("bookForm").getView().open(); else {
-            Alloy.createController("portal").getView().open();
-            Ti.App.Properties.setString("loginFrom", "index");
-        }
+        Alloy.createController("desde").getView().open();
+        $.index.close();
     }
     function later() {
-        if (0 != Ti.App.Properties.getString("user_id") && Ti.App.Properties.getString("user_id") && null != Ti.App.Properties.getString("user_id")) Alloy.createController("bookForm").getView().open(); else {
-            Alloy.createController("portal").getView().open();
-            Ti.App.Properties.setString("loginFrom", "index");
-        }
+        Alloy.createController("desde").getView().open();
+        $.index.close();
     }
     function endTouch() {
         buttonPressed && (buttonPressed = false);
@@ -153,22 +149,22 @@ function Controller() {
         id: "leftMenu"
     });
     $.__views.containerview.add($.__views.leftMenu);
-    var __alloyId1 = [];
-    $.__views.__alloyId2 = Ti.UI.createTableViewRow({
+    var __alloyId4 = [];
+    $.__views.__alloyId5 = Ti.UI.createTableViewRow({
         title: "Cuenta",
         height: "24",
         indentionLevel: "0",
-        id: "__alloyId2"
+        id: "__alloyId5"
     });
-    __alloyId1.push($.__views.__alloyId2);
+    __alloyId4.push($.__views.__alloyId5);
     $.__views.menuLogger = Ti.UI.createTableViewRow({
         height: "46",
         indentionLevel: "1",
         id: "menuLogger"
     });
-    __alloyId1.push($.__views.menuLogger);
+    __alloyId4.push($.__views.menuLogger);
     $.__views.tableMenu = Ti.UI.createTableView({
-        data: __alloyId1,
+        data: __alloyId4,
         id: "tableMenu",
         scrollable: "false",
         footerTitle: "",
@@ -183,20 +179,20 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.containerview.add($.__views.movableView);
-    $.__views.__alloyId3 = Ti.UI.createButton({
+    $.__views.__alloyId6 = Ti.UI.createButton({
         title: "Estoy listo ahora!",
         top: "60dp",
-        id: "__alloyId3"
+        id: "__alloyId6"
     });
-    $.__views.movableView.add($.__views.__alloyId3);
-    now ? $.__views.__alloyId3.addEventListener("click", now) : __defers["$.__views.__alloyId3!click!now"] = true;
-    $.__views.__alloyId4 = Ti.UI.createButton({
+    $.__views.movableView.add($.__views.__alloyId6);
+    now ? $.__views.__alloyId6.addEventListener("click", now) : __defers["$.__views.__alloyId6!click!now"] = true;
+    $.__views.__alloyId7 = Ti.UI.createButton({
         title: "Necesito un taxi para mas tarde",
-        top: "60dp",
-        id: "__alloyId4"
+        top: "120dp",
+        id: "__alloyId7"
     });
-    $.__views.movableView.add($.__views.__alloyId4);
-    later ? $.__views.__alloyId4.addEventListener("click", later) : __defers["$.__views.__alloyId4!click!later"] = true;
+    $.__views.movableView.add($.__views.__alloyId7);
+    later ? $.__views.__alloyId7.addEventListener("click", later) : __defers["$.__views.__alloyId7!click!later"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.index.addEventListener("android:back", function() {
@@ -259,8 +255,8 @@ function Controller() {
         alert("Sesion cerrada con exito!");
     };
     __defers["$.__views.leftButton!click!toggle"] && $.__views.leftButton.addEventListener("click", toggle);
-    __defers["$.__views.__alloyId3!click!now"] && $.__views.__alloyId3.addEventListener("click", now);
-    __defers["$.__views.__alloyId4!click!later"] && $.__views.__alloyId4.addEventListener("click", later);
+    __defers["$.__views.__alloyId6!click!now"] && $.__views.__alloyId6.addEventListener("click", now);
+    __defers["$.__views.__alloyId7!click!later"] && $.__views.__alloyId7.addEventListener("click", later);
     _.extend($, exports);
 }
 

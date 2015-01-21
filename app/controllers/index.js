@@ -52,8 +52,13 @@ function account() {
     Alloy.createController("bookForm").getView().open();
   	};
 };
-function desde() {
+function now() {
 	Alloy.createController("desde").getView().open();
+	$.index.close();
+}
+function later() {
+	Alloy.createController("desde").getView().open();
+	$.index.close();
 }
 //LOGIN LOGOUT FUNCTIONS
 

@@ -42,20 +42,20 @@ function Controller() {
         backgroundColor: "white"
     });
     $.__views.portal.add($.__views.movableView);
-    $.__views.__alloyId5 = Ti.UI.createButton({
+    $.__views.__alloyId8 = Ti.UI.createButton({
         title: "Iniciar Sesion",
         top: "60dp",
-        id: "__alloyId5"
+        id: "__alloyId8"
     });
-    $.__views.movableView.add($.__views.__alloyId5);
-    login ? $.__views.__alloyId5.addEventListener("click", login) : __defers["$.__views.__alloyId5!click!login"] = true;
-    $.__views.__alloyId6 = Ti.UI.createButton({
+    $.__views.movableView.add($.__views.__alloyId8);
+    login ? $.__views.__alloyId8.addEventListener("click", login) : __defers["$.__views.__alloyId8!click!login"] = true;
+    $.__views.__alloyId9 = Ti.UI.createButton({
         title: "Registrarse",
         top: "120dp",
-        id: "__alloyId6"
+        id: "__alloyId9"
     });
-    $.__views.movableView.add($.__views.__alloyId6);
-    register ? $.__views.__alloyId6.addEventListener("click", register) : __defers["$.__views.__alloyId6!click!register"] = true;
+    $.__views.movableView.add($.__views.__alloyId9);
+    register ? $.__views.__alloyId9.addEventListener("click", register) : __defers["$.__views.__alloyId9!click!register"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -70,8 +70,8 @@ function Controller() {
             };
         }
     });
-    __defers["$.__views.__alloyId5!click!login"] && $.__views.__alloyId5.addEventListener("click", login);
-    __defers["$.__views.__alloyId6!click!register"] && $.__views.__alloyId6.addEventListener("click", register);
+    __defers["$.__views.__alloyId8!click!login"] && $.__views.__alloyId8.addEventListener("click", login);
+    __defers["$.__views.__alloyId9!click!register"] && $.__views.__alloyId9.addEventListener("click", register);
     _.extend($, exports);
 }
 
