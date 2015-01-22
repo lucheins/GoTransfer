@@ -6,8 +6,8 @@
     <property name="acs-oauth-secret-development" type="string">xv1AN55AXKhoNBDSGnpnQIo6jrfyU09z</property>
     <property name="acs-oauth-key-development" type="string">OZfmIOLbN3J5NZqMWCOdOtatwA06uXwY</property>
     <property name="acs-api-key-development" type="string">toCXr43h0J7qJmfLThG76RRJuZZmsHWE</property>
-    <id>com.taxipuertoapp.com</id>
-    <name>TaxiPuerto</name>
+    <id>com.gotransfer.com</id>
+    <name>GoTransfer</name>
     <version>1.0</version>
     <publisher>Luca Marketing</publisher>
     <url>http://taxi-puerto.com</url>
@@ -22,7 +22,7 @@
     <ios>
         <plist>
             <dict>
-            	<key>NSLocationAlwaysUsageDescription</key>
+                <key>NSLocationAlwaysUsageDescription</key>
                 <string>
                     Get reverse directions to allow user to access our taxi service.
                 </string>
